@@ -29,7 +29,7 @@ namespace Infrastructuur.Models
         [JsonProperty("image")]
         public string Image { get; set; }
         [JsonProperty("price")]
-        public int? rating { get; set; }
+        public int? Rating { get; set; }
         [JsonProperty("addedDate")]
 
         public string AddedDate { get; set; } = DateTime.Now.ToString("dd/MM/yyyy");

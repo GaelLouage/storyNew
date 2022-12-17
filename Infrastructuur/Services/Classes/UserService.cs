@@ -23,9 +23,24 @@ namespace Infrastructuur.Services.Classes
             throw new NotImplementedException();
         }
 
-        public Task<UserEntity> AddUserAsync(StoryzonEntity storyzon)
+        public async Task<UserEntity> AddUserAsync(UserEntity user)
         {
-            throw new NotImplementedException();
+            if ((await _storyZonDbContext.GetAllAsync<UserEntity>("user"))
+                .Any(x => x.UserName == user.UserName ||
+                          (x.FirstName == user.FirstName &&
+                          x.LastName == user.LastName) ||
+                          x.Email == user.Email))
+                {
+                return user;
+            }
+            return await _storyZonDbContext.CreateAsync<UserEntity>(user, "user", new MongoDB.Bson.BsonDocument
+            {
+                { "userName", user.UserName},
+                { "firstName", user.FirstName},
+                { "lastName", user.LastName},
+                { "password", user.Password},
+                { "email", user.Email}
+            });
         }
 
         public Task<bool> DeleteUserByIdAsync(string id)
@@ -43,9 +58,9 @@ namespace Infrastructuur.Services.Classes
             throw new NotImplementedException();
         }
 
-        public Task<List<UserEntity>> GetUsersAsync()
+        public async Task<List<UserEntity>> GetUsersAsync()
         {
-            throw new NotImplementedException();
+            return (await _storyZonDbContext.GetAllAsync<UserEntity>("user")).ToList();
         }
 
         public Task<bool> RemoveStoryFromUserAsync(string userId, string storyzonId)

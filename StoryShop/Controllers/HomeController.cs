@@ -17,12 +17,25 @@ namespace StoryShop.Controllers
         {
             return View();
         }
-
+        public IActionResult About()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
         }
+        // login
+        public IActionResult Login()
+        {
+            return View();
+        }
 
+        // regiser
+        public IActionResult Register()
+        {
+            return View();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

@@ -4,45 +4,74 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using NPOI.HSSF.UserModel;
+using NPOI.HSSF.Util;
 
 namespace Infrastructuur.extensions
 {
-    public  class ExcelSystem
+    public static  class ExcelSystem 
     {
-        public  void WriteStoryToExcell( List<StoryzonEntity> stories)
+
+        public static bool WriteStoryDataToExcell(this List<StoryzonEntity> stories )
         {
-            // Create an instance of the Excel application
-            var excelApp = new Application();
-            // Create a new workbook
-            var workbook = excelApp.Workbooks.Add();
-
-            // Get the first worksheet
-            var worksheet = workbook.Sheets[1];
-
-            // Write data to the worksheet
-            worksheet.Cells[1, 1].Value = "Title";
-            worksheet.Cells[1, 2].Value = "Genre";
-            worksheet.Cells[1, 3].Value = "Rating";
-            worksheet.Cells[1, 4].Value = "AddedDate";
-
-            for (int i = 0; i < stories.Count; i++)
+            try
             {
-                worksheet.Cells[i, 1].Value = stories[i].Title;
-                worksheet.Cells[i, 2].Value = stories[i].Genre;
-                worksheet.Cells[i, 3].Value = stories[i].rating;
-                worksheet.Cells[i, 4].Value = stories[i].AddedDate;
+                // Create a new workbook
+                var workbook = new HSSFWorkbook();
+                // Create a new worksheet
+                // Create a new font and set its color to orange
+                var font = workbook.CreateFont();
+               
+
+                // Create a new cell style and set the font
+                var style = workbook.CreateCellStyle();
+                style.FillForegroundColor = HSSFColor.Red.Index;
+                style.FillPattern = FillPattern.SolidForeground;
+                style.SetFont(font);
+                var sheet = workbook.CreateSheet("Sheet1");
+
+
+                // Write the header row
+                var row = sheet.CreateRow(0);
+                var cell = row.CreateCell(0);
+                cell.SetCellValue("Title");
+                cell.CellStyle = style;
+                cell = row.CreateCell(1);
+                cell.SetCellValue("Genre");
+                cell.CellStyle = style;
+                cell = row.CreateCell(2);
+                cell.SetCellValue("Rating");
+                cell.CellStyle = style;
+                cell = row.CreateCell(3);
+                cell.SetCellValue("AddedDate");
+                cell.CellStyle = style;
+              
+                for (int i = 0; i < stories.Count; i++)
+                {
+                    row = sheet.CreateRow(i+1);
+                    row.CreateCell(0).SetCellValue(@stories[i].Title);
+                    row.CreateCell(1).SetCellValue(@stories[i].Genre);
+                    row.CreateCell(2).SetCellValue(@stories[i].Rating.ToString() ?? "no rating");
+                    row.CreateCell(3).SetCellValue(@stories[i].AddedDate);
+                }
+                var fileName = $"StoryData.xls";
+
+                // Save the workbook to a file
+                using (var fileStream = File.Create(fileName))
+                {
+                    workbook.Write(fileStream);
+
+                }
+                return true;
             }
-          
+            catch
+            {
 
-
-
-            // Save the workbook
-            workbook.SaveAs("C:\\StoryzonData.xlsx");
-
-            // Clean up
-            workbook.Close();
-            excelApp.Quit();
+                return false;
+            }
+       
         }
     }
 }

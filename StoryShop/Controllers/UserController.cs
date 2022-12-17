@@ -1,4 +1,5 @@
-﻿using Infrastructuur.Services.Interfaces;
+﻿using Infrastructuur.Models;
+using Infrastructuur.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,11 +15,15 @@ namespace StoryShop.Controllers
         }
 
         // GET: UserController
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View((await _userService.GetUsersAsync()).ToList());
         }
-
+        // GET: UserController
+        public async Task<IActionResult> UserManagement()
+        {
+            return View((await _userService.GetUsersAsync()).ToList());
+        }
         // GET: UserController/Details/5
         public ActionResult Details(int id)
         {
@@ -34,11 +39,12 @@ namespace StoryShop.Controllers
         // POST: UserController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(UserEntity user)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                await _userService.AddUserAsync(user);
+                return RedirectToAction(nameof(UserManagement));
             }
             catch
             {

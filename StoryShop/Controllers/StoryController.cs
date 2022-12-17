@@ -138,5 +138,17 @@ namespace StoryShop.Controllers
                 return View();
             }
         }
+
+        //write to excell
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> WriteToExcel()
+        {
+            if((await _storyZonService.GetStoryzonsAsync()).ToList().WriteStoryDataToExcell())
+            {
+                return RedirectToAction(nameof(AdminList));
+            }
+            return RedirectToAction(nameof(AdminList));
+        }
     }
 }

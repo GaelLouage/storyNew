@@ -20,13 +20,21 @@
                     <div class="col-xs-5">
                         <h2>Story <b>Management</b></h2>
                     </div>
-                    <div class="col-xs-7">
+                    <div class="col-xs-7 d-flex top-buttons-container">
 
-                        <a asp-action="Create" class="btn bg-dark text-white"><i class="material-icons bg-dark text-white">&#xE147;</i> <span>Add New Story</span></a>
-                        <a asp-action="WriteToExcel" class="btn bg-dark text-white"><i class="material-icons">&#xE24D;</i> <span>Export to Excel</span></a>
+                        @*serachbar here and drowpdownlist with filter*@
+
+
                     </div>
                 </div>
             </div>
+            <div class="top-buttons">
+                <a asp-action="Create" class="btn bg-dark text-white pl-2 w-25"><i class="material-icons bg-dark text-white">&#xE147;</i> <span>Add New Story</span></a>
+                <form asp-action="WriteToExcel" class="excell-button" method="post">
+                    <button asp-action="" class="btn bg-dark text-white w-25"><i class="material-icons">&#xE24D;</i> <span>Export to Excel</span></button>
+                </form>
+            </div>
+
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -43,15 +51,15 @@
                     {
                         <tr>
                             <td>@tableCounter</td>
-                            <td><a asp-action="Details" asp-route-id="@story.Id"><img src="~/@story.Image" class="avatar" style="width:3em" alt="Avatar">@story.Title</a></td>
+                            <td><a asp-action="Details" asp-route-id="@story.Id"><img src="~/@story.Image" class="avatar" style="width:3em" alt="Avatar">  @story.Title</a></td>
                             <td>@story.Genre</td>
-                            @if (string.IsNullOrEmpty(@story.rating.ToString()))
+                            @if (string.IsNullOrEmpty(@story.Rating.ToString()))
                             {
                                 <td>0</td>
                             }
                             else
                             {
-                                <td>@story.rating</td>
+                                <td>@story.Rating</td>
                             }
                             <td>@story.AddedDate</td>
                             <td>

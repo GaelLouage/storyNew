@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "CrZ8VZverGYArPamERmAD1PlU/LMywhY7oy9xtUU2XQ=",
+  "Hash": "HAekdHj4753nKL5cl5zLbSz/5Yrr6oHxQAA2w9E1a14=",
   "Source": "StoryShop",
   "BasePath": "_content/StoryShop",
   "Mode": "Default",
@@ -134,6 +134,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\lightbox.css"
+    },
+    {
+      "Identity": "C:\\Users\\louag\\Desktop\\storyzon\\Story\\StoryShop\\wwwroot\\css\\Login.css",
+      "SourceId": "StoryShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\louag\\Desktop\\storyzon\\Story\\StoryShop\\wwwroot\\",
+      "BasePath": "_content/StoryShop",
+      "RelativePath": "css/Login.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Login.css"
     },
     {
       "Identity": "C:\\Users\\louag\\Desktop\\storyzon\\Story\\StoryShop\\wwwroot\\css\\management-table.css",

@@ -31,7 +31,7 @@ namespace Infrastructuur.Services.Classes
                 { "genre", storyzon.Genre },
                 { "image", storyzon.Image },
                 {"addedDate", storyzon.AddedDate },
-                { "rating", storyzon.rating.ToString() ?? "0" }
+                { "rating", storyzon.Rating.ToString() ?? "0" }
             }); 
         }
 
@@ -66,7 +66,7 @@ namespace Infrastructuur.Services.Classes
                 { "bodyEn", storyzon.BodyEn ?? ""},
                 { "image", storyzon.Image ?? ""},
                 { "genre", storyzon.Genre ?? "" },
-                { "rating", storyzon.rating.ToString() ?? "0" }
+                { "rating", storyzon.Rating.ToString() ?? "0" }
             };
             if(!await _storyZonDbContext.UpdateAsync<StoryzonEntity>(id, fieldsToUpdate, "storyzon"))
             {

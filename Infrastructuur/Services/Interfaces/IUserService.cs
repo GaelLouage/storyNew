@@ -11,7 +11,7 @@ namespace Infrastructuur.Services.Interfaces
     {
         Task<List<UserEntity>> GetUsersAsync();
         Task<UserEntity> GetUserByIdAsync(string id);
-        Task<UserEntity> AddUserAsync(StoryzonEntity storyzon);
+        Task<UserEntity> AddUserAsync(UserEntity user);
         Task<bool> DeleteUserByIdAsync(string id);
         Task<UserEntity> UpdateUserByIdAsync(string id, UserEntity user);
         // favorite stories 
