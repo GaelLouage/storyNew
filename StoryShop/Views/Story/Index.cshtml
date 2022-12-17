@@ -1,0 +1,231 @@
+﻿@using Infrastructuur.Models
+@using Infrastructuur.helpers
+@model IEnumerable<Infrastructuur.Models.StoryzonEntity>
+@{
+    ViewData["Title"] = "Index";
+    var stories = ViewData["topStories"] as List<StoryzonEntity>;
+   
+    var toplist = new List<StoryzonEntity> {
+        stories?.FirstOrDefault(x => x.Title == "Zombie King"),
+        stories?.FirstOrDefault(x => x.Title == "Indian Adventure"),
+        stories?.FirstOrDefault(x => x.Title == "The man with teeth of steel"),
+        stories?.FirstOrDefault(x => x.Title == "Horror Keyboard"),
+        stories?.FirstOrDefault(x => x.Title == "The living mountain")
+     };
+    List<StoryzonEntity> GetListFromGenre(string genre) =>
+            stories?.Where(x => x.Genre.Contains(genre)).ToList();
+    
+}
+
+@*@if (User.IsInRole("Admin"))
+{*@
+
+<!-- ***** Main Banner Area Start ***** -->
+<div class="main-banner" id="top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="left-content">
+                    <div class="thumb">
+                        <div class="inner-content">
+                            <h4>@toplist[0].Title</h4>
+                            <span style="max-width: 25em">@toplist[0].BodyEn.Split('.')[0] .</span>
+                            <div class="main-border-button">
+                                <a asp-action="Details" asp-route-id="@toplist[0].Id">Discover More!</a>
+                            </div>
+                        </div>
+                        <img src="~/@toplist[0].Image" alt="@toplist[0].Title">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="right-content">
+                    <div class="row">
+                        @foreach (var story in toplist.Skip(1))
+                        {
+                            <div class="col-lg-6">
+                                <div class="right-first-image">
+                                    <div class="thumb">
+                                        <div class="inner-content">
+                                            <h4>@story.Title</h4>
+                                        </div>
+                                        <div class="hover-content">
+                                            <div class="inner">
+                                                <p style="max-height: 5em">@story.BodyEn.Split(' ')[0] @story.BodyEn.Split(' ')[1] @story.BodyEn.Split(' ')[2] @story.BodyEn.Split(' ')[3] @story.BodyEn.Split(' ')[4]...</p>
+                                                <div class="main-border-button">
+                                                    <a asp-action="Details" asp-route-id="@story.Id">Discover More!</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <img src="~/@story.Image">
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** adventure Area Starts ***** -->
+<section class="section" id="men">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="section-heading">
+                    <h2>ADVENTURE</h2>
+                    <span>Micro adventure stories </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="men-item-carousel">
+                    <div class="owl-men-item owl-carousel">
+
+                        @foreach (var story in GetListFromGenre(Genre.Adventure))
+                        {
+                            <div class="item">
+                                <div class="thumb">
+                                    <div class="hover-content">
+                                        <ul>
+                                            <li><a asp-action="Details" asp-route-id=@story.Id><i class="fa fa-eye"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <img src="~/@story.Image" alt="">
+                                </div>
+                                <div class="down-content">
+                                    <h4>@story.Title</h4>
+                                </div>
+                                  <ul class="stars d-flex">
+                                        @for (int i = 0; i < 5; i++)
+                                        {
+                                            if (@story.rating > i)
+                                            {
+                                                <li><i class="fa fa-star" style="color:orange;"></i></li>
+                                            }
+                                            else
+                                            {
+                                                <li><i class="fa fa-star checked"></i></li>
+                                            }
+                                        }
+                                    </ul>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ***** horror Area Starts ***** -->
+<section class="section" id="women">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="section-heading">
+                    <h2>ACTION</h2>
+                    <span>Micro action stories </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="men-item-carousel">
+                    <div class="owl-men-item owl-carousel">
+
+                        @foreach (var story in GetListFromGenre(Genre.Action))
+                        {
+                            <div class="item">
+                                <div class="thumb">
+                                    <div class="hover-content">
+                                        <ul>
+                                            <li><a asp-action="Details" asp-route-id=@story.Id><i class="fa fa-eye"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <img src="~/@story.Image" alt="">
+                                </div>
+                                <div class="down-content">
+                                    <h4>@story.Title</h4>
+                                </div>
+                                   <ul class="stars d-flex">
+                                        @for (int i = 0; i < 5; i++)
+                                        {
+                                            if (@story.rating > i)
+                                            {
+                                                <li><i class="fa fa-star" style="color:orange;"></i></li>
+                                            }
+                                            else
+                                            {
+                                                <li><i class="fa fa-star checked"></i></li>
+                                            }
+                                        }
+                                    </ul>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ***** horror Area Starts ***** -->
+<section class="section" id="kids">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="section-heading">
+                    <h2>HORROR</h2>
+                    <span>Micro horror stories </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="men-item-carousel">
+                    <div class="owl-men-item owl-carousel">
+
+                        @foreach (var story in GetListFromGenre(Genre.Horror))
+                        {
+                            <div class="item">
+                                <div class="thumb">
+                                    <div class="hover-content">
+                                        <ul>
+                                            <li><a asp-action="Details" asp-route-id=@story.Id><i class="fa fa-eye"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <img src="~/@story.Image" alt="">
+                                </div>
+                                <div class="down-content">
+                                    <h4>@story.Title</h4>
+                                </div>
+                                   <ul class="stars d-flex">
+                                        @for (int i = 0; i < 5; i++)
+                                        {
+                                            if (@story.rating > i)
+                                            {
+                                                <li><i class="fa fa-star" style="color:orange;"></i></li>
+                                            }
+                                            else
+                                            {
+                                                <li><i class="fa fa-star checked"></i></li>
+                                            }
+                                        }
+                                    </ul>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,24 @@
+﻿@model Infrastructuur.Models.StoryzonEntity
+
+@{
+    ViewData["Title"] = "Delete";
+    var textTop = Model?.BodyEn?.Split('.').Take(8).ToList();
+    var textbottom = Model?.BodyEn?.Split('.').Skip(8).ToList();
+}
+
+
+
+<h3 class="text-center mt-5 mb-5">Are you sure you want to delete @Model.Title?</h3>
+
+
+<hr />
+
+    <div class="w-100 text-center d-flex justify-content-center mt-5 mb-5">
+        <img class="mobile-w-50" src="~/@Model.Image" />
+    </div>
+
+
+<form class="text-center" asp-action="Delete">
+    <input type="submit" value="Delete" class="btn btn-danger" /> |
+    <a class="btn btn-primary" asp-action="Index">Back to List</a>
+</form>

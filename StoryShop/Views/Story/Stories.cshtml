@@ -1,0 +1,130 @@
+﻿@using Infrastructuur.Models
+@model IEnumerable<Infrastructuur.Models.StoryzonEntity>
+
+@{
+    ViewData["Title"] = "Stories";
+       var stories =  ViewData["stoyList"] as List<StoryzonEntity>;
+}
+
+<hr />
+
+<section class="section" id="products">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-heading">
+                    <h2>Our Stories</h2>
+                    <span>Check out all of our stories.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+
+            @foreach (var story in @Model)
+            {
+                <div class="col-lg-4">
+                    <div class="item">
+                        <div class="thumb">
+                            <div class="hover-content">
+                                <ul>
+                                    <li><a asp-action="Details" asp-route-id=@story.Id><i class="fa fa-eye"></i></a></li>
+                                </ul>
+                            </div>
+                            <img src="~/@story.Image" alt="">
+                        </div>
+                        <div class="down-content">
+                            <h4>@story.Title</h4>
+
+                        </div>
+                        <ul class="stars d-flex">
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                if (@story.rating > i)
+                                {
+                                    <li><i class="fa fa-star" style="color:orange;"></i></li>
+                                }
+                                else
+                                {
+                                    <li><i class="fa fa-star checked"></i></li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+
+
+
+        </div>
+        <div class="col-lg-12">
+            <div class="pagination">
+                <ul>
+                    @if (@stories.Count() <= 6)
+                    {
+                        <li>
+                            <a asp-action="Stories" asp-route-amountToShow=6>1</a>
+                        </li>
+
+                    }
+                    else if (@stories.Count() <= 12)
+                    {
+                        <li>
+                            <a asp-action="Stories" asp-route-amountToShow=6>1</a>
+                        </li>
+                        <li>
+                            <a asp-action="Stories" asp-route-amountToShow=12>2</a>
+                        </li>
+                    }
+                    else if (@stories.Count() <= 18)
+                    {
+                        <li>
+                            <a asp-action="Stories" asp-route-amountToShow=6>1</a>
+                        </li>
+                        <li>
+                            <a asp-action="Stories" asp-route-amountToShow=12>2</a>
+                        </li>
+                        <li>
+                            <a asp-action="Stories" asp-route-amountToShow=18>3</a>
+                        </li>
+                    }
+                    else if (@stories.Count() <= 24)
+                    {
+                        <li>
+                            <a asp-action="Stories" asp-route-amountToShow=6>1</a>
+                        </li>
+                        <li>
+                            <a asp-action="Stories" asp-route-amountToShow=12>2</a>
+                        </li>
+                        <li>
+                            <a asp-action="Stories" asp-route-amountToShow=18>3</a>
+                        </li>
+                        <li>
+                            <a asp-action="Stories" asp-route-amountToShow=24>4</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a asp-action="Stories" asp-route-amountToShow=6>1</a>
+                        </li>
+                        <li class="active">
+                            <a asp-action="Stories" asp-route-amountToShow=12>2</a>
+                        </li>
+                        <li>
+                            <a asp-action="Stories" asp-route-amountToShow=18>3</a>
+                        </li>
+                        <li>
+                            <a asp-action="Stories" asp-route-amountToShow=24>4</a>
+                        </li>
+                        <li>
+                            <a asp-action="Stories" asp-route-amountToShow=32>5</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>

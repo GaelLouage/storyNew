@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StoryZon</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/StoryShop.styles.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Additional CSS Files -->
+      <link rel="icon" type="image/x-icon" href="~/Images/storyzonLogo.jpg">
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/css/font-awesome.css">
+    <link rel="stylesheet" href="~/css/templatemo-hexashop.css">
+    <link rel="stylesheet" href="~/css/owl-carousel.css">
+    <link rel="stylesheet" href="~/css/lightbox.css">
+</head>
+<body>
+
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a asp-action="Index" asp-controller="Story" class="logo">
+                            <img class="rounded-pill" src="~/Images/storyzonLogo.jpg" style="width: 50px">
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a asp-action="Index" asp-controller="Story" class="active">Home</a></li>
+                            <li class="scroll-to-section"><a href="#men">Adventure</a></li>
+                            <li class="scroll-to-section"><a href="#women">Action</a></li>
+                            <li class="scroll-to-section"><a href="#kids">Horror</a></li>
+                            <li class="submenu">
+                                <a href="javascript:;">Pages</a>
+                                <ul>
+                                    <li><a href="about.html">About Us</a></li>
+                                    <li><a asp-action="Stories" asp-controller="Story">Stories</a></li>
+                                    <li><a href="single-product.html">Single Product</a></li>
+                                    <li><a href="contact.html">Contact Us</a></li>
+                                </ul>
+                            </li>
+                          
+                            @if (User.IsInRole("Admin") || User.IsInRole("User"))
+                            {
+
+                            }
+                            else
+                            {
+                                <li class="submenu">
+                                    <a href="javascript:;"><i class="fa fa-user"></i></a>
+                                     <ul>
+                                    <li><a href="#">Profile</a></li>
+                                    <li><a href="#">Features Page 2</a></li>
+                                    <li><a href="#">Features Page 3</a></li>
+                                    <li><a rel="nofollow" href="https://templatemo.com/page/4" target="_blank">Template Page 4</a></li>
+                                      <li><hr class="dropdown-divider" /></li>
+                                     <li><a  asp-action="Create" asp-controller="Story">Create story</a></li>
+                                </ul>
+                                </li>
+
+                                 <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            }
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+       <!-- ***** Footer Start ***** -->
+    <footer>
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-6">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="#men">Adventure</a></li>
+                        <li><a href="#woman">Action</a></li>
+                        <li><a href="#kids">Horror</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-6">
+                    <h4>Useful Links</h4>
+                    <ul>
+                        <li><a href="#">Homepage</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Help</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-12">
+                    <div class="under-footer">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- jQuery -->
+    <script src="assets/js/jquery-2.1.0.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="assets/js/popper.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <!-- Plugins -->
+    <script src="~/js/owl-carousel.js"></script>
+    <script src="~/js/accordions.js"></script>
+    <script src="~/js/datepicker.js"></script>
+    <script src="~/js/scrollreveal.min.js"></script>
+    <script src="~/js/waypoints.min.js"></script>
+    <script src="~/js/jquery.counterup.min.js"></script>
+    <script src="~/js/imgfix.min.js"></script>
+    <script src="~/js/slick.js"></script>
+    <script src="~/js/lightbox.js"></script>
+    <script src="~/js/isotope.js"></script>
+
+    <!-- Global Init -->
+    <script src="~/js/custom.js"></script>
+
+    <script>
+
+        $(function() {
+            var selectedClass = "";
+            $("p").click(function() {
+                selectedClass = $(this).attr("data-rel");
+                $("#portfolio").fadeTo(50, 0.1);
+                $("#portfolio div").not("." + selectedClass).fadeOut();
+                setTimeout(function() {
+                    $("." + selectedClass).fadeIn();
+                    $("#portfolio").fadeTo(50, 1);
+                }, 500);
+
+            });
+        });
+
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
