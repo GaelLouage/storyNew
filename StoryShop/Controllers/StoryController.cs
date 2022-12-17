@@ -10,6 +10,7 @@ namespace StoryShop.Controllers
     {
         private readonly IStoryZonService _storyZonService;
         private readonly IFileService _fileService;
+
         public StoryController(IStoryZonService storyZonService, IFileService fileService)
         {
             _storyZonService = storyZonService;
@@ -20,10 +21,16 @@ namespace StoryShop.Controllers
         public async Task<ActionResult> Index()
         {
             var stories = await _storyZonService.GetStoryzonsAsync();
+
             ViewData["topStories"] = stories;
             return View(stories);
         }
-
+        //admin list
+        public async Task<IActionResult> AdminList()
+        {
+            var stories = (await _storyZonService.GetStoryzonsAsync()).ToList();
+            return View(stories);
+        }
         // GET: getallstories
         public async Task<ActionResult> Stories(int amountToShow)
         {
@@ -78,7 +85,7 @@ namespace StoryShop.Controllers
                 // to the form in the htmlcs file
                 storyzon.Image = fileImage.UploadImage();
                 await _storyZonService.AddStoryZonAsync(storyzon);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(AdminList));
             }
             catch
             {
@@ -102,7 +109,7 @@ namespace StoryShop.Controllers
                 storyzon.Image = image.UploadImage();
                 //var storyToUpdate = (await _storyZonService.GetStoryzonByIdAsync(id));
                 await _storyZonService.UpdateStoryZonByIdAsync(id, storyzon);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(AdminList));
             }
             catch
             {
@@ -124,7 +131,7 @@ namespace StoryShop.Controllers
             try
             {
                 await _storyZonService.DeleteStoryzonByIdAsync(id);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(AdminList));
             }
             catch
             {

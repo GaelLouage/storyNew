@@ -2,13 +2,23 @@
 
 @{
     ViewData["Title"] = "Details";
-
-
+      var storyDelete = ViewData["storyDeleted"] as string;
 }
-
-
 <div class="contact-us pt-5">
-    <h1 class="text-center mt-5 ">@Model.Title</h1>
+      @if (!string.IsNullOrEmpty(storyDelete))
+    {
+        <div class="container mt-5">
+            <div id="alert" class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                @storyDelete
+            </div>
+        </div>
+    }
+    <div class="section-heading">
+        <h2 class="text-center mt-5 ">@Model.Title</h2>
+    </div>
     <div class="container">
         <div class="row ">
             <div class="col-lg-6 align-baseline">
@@ -27,8 +37,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <div id="map">
-                    reviws
+                <div class="section-heading">
+                    <h2>Reviews</h2>
+                    <span>@Model.Title Reviews</span>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -36,7 +47,7 @@
                     <h2>Write a review</h2>
                     <span>Your feedback is greatly appreciated and will help us improve in the future.</span>
                 </div>
-                <form id="contact" action="" method="post">
+                <form id="contact" method="post">
                     <div class="row">
                         <div class="col-lg-6">
                             <fieldset>
@@ -64,3 +75,4 @@
         </div>
     </div>
 </div>
+

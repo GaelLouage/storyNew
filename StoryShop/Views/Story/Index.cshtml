@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Index";
     var stories = ViewData["topStories"] as List<StoryzonEntity>;
-   
+
     var toplist = new List<StoryzonEntity> {
         stories?.FirstOrDefault(x => x.Title == "Zombie King"),
         stories?.FirstOrDefault(x => x.Title == "Indian Adventure"),
@@ -14,7 +14,9 @@
      };
     List<StoryzonEntity> GetListFromGenre(string genre) =>
             stories?.Where(x => x.Genre.Contains(genre)).ToList();
-    
+
+
+    var storyDelete = ViewData["storyDeleted"] as string;
 }
 
 @*@if (User.IsInRole("Admin"))
@@ -22,6 +24,17 @@
 
 <!-- ***** Main Banner Area Start ***** -->
 <div class="main-banner" id="top">
+    @if (!string.IsNullOrEmpty(storyDelete))
+    {
+        <div class="container mt-5">
+            <div id="alert" class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                @storyDelete
+            </div>
+        </div>
+    }
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-6">
@@ -100,19 +113,19 @@
                                 <div class="down-content">
                                     <h4>@story.Title</h4>
                                 </div>
-                                  <ul class="stars d-flex">
-                                        @for (int i = 0; i < 5; i++)
+                                <ul class="stars d-flex">
+                                    @for (int i = 0; i < 5; i++)
+                                    {
+                                        if (@story.rating > i)
                                         {
-                                            if (@story.rating > i)
-                                            {
-                                                <li><i class="fa fa-star" style="color:orange;"></i></li>
-                                            }
-                                            else
-                                            {
-                                                <li><i class="fa fa-star checked"></i></li>
-                                            }
+                                            <li><i class="fa fa-star" style="color:orange;"></i></li>
                                         }
-                                    </ul>
+                                        else
+                                        {
+                                            <li><i class="fa fa-star checked"></i></li>
+                                        }
+                                    }
+                                </ul>
                             </div>
                         }
                     </div>
@@ -153,19 +166,19 @@
                                 <div class="down-content">
                                     <h4>@story.Title</h4>
                                 </div>
-                                   <ul class="stars d-flex">
-                                        @for (int i = 0; i < 5; i++)
+                                <ul class="stars d-flex">
+                                    @for (int i = 0; i < 5; i++)
+                                    {
+                                        if (@story.rating > i)
                                         {
-                                            if (@story.rating > i)
-                                            {
-                                                <li><i class="fa fa-star" style="color:orange;"></i></li>
-                                            }
-                                            else
-                                            {
-                                                <li><i class="fa fa-star checked"></i></li>
-                                            }
+                                            <li><i class="fa fa-star" style="color:orange;"></i></li>
                                         }
-                                    </ul>
+                                        else
+                                        {
+                                            <li><i class="fa fa-star checked"></i></li>
+                                        }
+                                    }
+                                </ul>
                             </div>
                         }
                     </div>
@@ -208,19 +221,19 @@
                                 <div class="down-content">
                                     <h4>@story.Title</h4>
                                 </div>
-                                   <ul class="stars d-flex">
-                                        @for (int i = 0; i < 5; i++)
+                                <ul class="stars d-flex">
+                                    @for (int i = 0; i < 5; i++)
+                                    {
+                                        if (@story.rating > i)
                                         {
-                                            if (@story.rating > i)
-                                            {
-                                                <li><i class="fa fa-star" style="color:orange;"></i></li>
-                                            }
-                                            else
-                                            {
-                                                <li><i class="fa fa-star checked"></i></li>
-                                            }
+                                            <li><i class="fa fa-star" style="color:orange;"></i></li>
                                         }
-                                    </ul>
+                                        else
+                                        {
+                                            <li><i class="fa fa-star checked"></i></li>
+                                        }
+                                    }
+                                </ul>
                             </div>
                         }
                     </div>
