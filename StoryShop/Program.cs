@@ -1,6 +1,7 @@
 using Infrastructuur.Database;
 using Infrastructuur.Services.Classes;
 using Infrastructuur.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,8 @@ builder.Services.AddSingleton(new StoryZonDbContext());
 builder.Services.AddScoped<IStoryZonService, StoryzonService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options => { options.LoginPath = "/login"; });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,6 +29,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

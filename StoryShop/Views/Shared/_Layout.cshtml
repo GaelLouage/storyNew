@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Infrastructuur.EnumsAndStaticProps
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -20,7 +21,7 @@
     <link rel="stylesheet" href="~/css/owl-carousel.css">
     <link rel="stylesheet" href="~/css/bootstrap-alert.css">
     <link rel="stylesheet" href="~/css/lightbox.css">
-     <link rel="stylesheet" href="~/css/Login.css">
+    <link rel="stylesheet" href="~/css/Login.css">
 </head>
 <body>
 
@@ -50,28 +51,34 @@
                                 </ul>
                             </li>
 
-                            @if (User.IsInRole("Admin") || User.IsInRole("User"))
+                            @if (User.IsInRole(Role.Admin) || User.IsInRole(Role.User) || User.IsInRole(Role.SuperAdmin))
                             {
-
-                            }
-                            else
-                            {
-                                     <li><a asp-action="Login" asp-controller="Home">Login</a></li>  
-                                     <li>|</li>
-                                    <li><a asp-action="Register" asp-controller="Home">Register</a></li>
-                                <li class="submenu">
+                                  <li class="scroll-to-section"><a href="#kids">Welcome @User.Identity.Name</a></li>
+                                   <li class="submenu">
                                     <a href="javascript:;"><i class="fa fa-user"></i></a>
                                     <ul>
                                         <li><a href="#">Profile</a></li>
-                                        <li><a href="#">Logout</a></li>
-                                        <li><hr class="dropdown-divider" /></li>
-                                        <li><a asp-action="AdminList" asp-controller="Story">Story Management</a></li>
-                                          <li><a asp-action="UserManagement" asp-controller="User">User Management</a></li>
+                                        <li><a asp-action="Logout" asp-controller="User">Logout</a></li>
+                                        @if (User.IsInRole(Role.Admin) || User.IsInRole(Role.SuperAdmin))
+                                        {
+                                            <li><hr class="dropdown-divider" /></li>
+                                            <li><a asp-action="AdminList" asp-controller="Story">Story Management</a></li>
+                                            <li><a asp-action="UserManagement" asp-controller="User">User Management</a></li>
+                                        }
+                                     
                                     </ul>
                                 </li>
-@*
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>*@
                             }
+                            else
+                            {
+                                <li><a asp-action="Login" asp-controller="User">Login</a></li>
+                                <li class="pt-2 baar">|</li>
+                                <li><a asp-action="Register" asp-controller="User">Register</a></li>
+
+                                @*
+                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>*@
+                            }
+                           
                         </ul>
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -102,9 +109,7 @@
                 <div class="col-lg-6">
                     <h4>Useful Links</h4>
                     <ul>
-                        <li><a href="#">Homepage</a></li>
                         <li><a href="#">About Us</a></li>
-                        <li><a href="#">Help</a></li>
                         <li><a href="#">Contact Us</a></li>
                     </ul>
                 </div>

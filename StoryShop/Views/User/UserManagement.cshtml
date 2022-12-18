@@ -18,7 +18,7 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-xs-5">
-                        <h2>Story <b>Management</b></h2>
+                        <h2>User <b>Management</b></h2>
                     </div>
                     <div class="col-xs-7 d-flex top-buttons-container">
 
@@ -29,7 +29,7 @@
             <div class="top-buttons">
                 <a asp-action="Create" class="btn bg-dark text-white pl-2 w-25"><i class="material-icons bg-dark text-white">&#xE147;</i> <span>Add New User</span></a>
                 <form asp-action="WriteToExcel" class="excell-button" method="post">
-                    <button asp-action="" class="btn bg-dark text-white w-25"><i class="material-icons">&#xE24D;</i> <span>Export to Excel</span></button>
+                    <button type="Submit" class="btn bg-dark text-white w-25"><i class="material-icons">&#xE24D;</i> <span>Export to Excel</span></button>
                 </form>
             </div>
 
@@ -41,6 +41,7 @@
                         <th>Firstname</th>
                         <th>Lastname</th>
                         <th>Email</th>
+                        <th>Role</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -53,6 +54,7 @@
                             <td>@user.FirstName</td>
                             <td>@user.LastName</td>
                             <td>@user.Email</td>
+                            <td>@user.Role</td>
                             <td>
                                 <a asp-action="Edit" asp-route-id="@user.Id" class="settings text-black" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE8B8;</i></a>
                                 <a asp-action="Delete" asp-route-id="@user.Id" class="delete text-black " title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>

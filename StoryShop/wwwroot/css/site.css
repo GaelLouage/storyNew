@@ -39,5 +39,8 @@ body {
         display: flex !important;
         flex-direction: row;
     }
+    .baar{
+        display:none;
+    }
 }
 

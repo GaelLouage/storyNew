@@ -11,13 +11,15 @@ namespace Infrastructuur.Services.Interfaces
     {
         Task<List<UserEntity>> GetUsersAsync();
         Task<UserEntity> GetUserByIdAsync(string id);
-        Task<UserEntity> AddUserAsync(UserEntity user);
+        Task<bool> AddUserAsync(UserEntity user);
         Task<bool> DeleteUserByIdAsync(string id);
-        Task<UserEntity> UpdateUserByIdAsync(string id, UserEntity user);
+        Task<bool> UpdateUserByIdAsync(string id, UserEntity user);
         // favorite stories 
         Task<List<StoryzonEntity>> GetAllStoriesByUserIdAsync(string userId);
         Task<StoryzonEntity> AddStoryToUserByUserIdAsync(string userId, string storyzonId);
         Task<bool> RemoveStoryFromUserAsync
             (string userId, string storyzonId);
+
+        Task<UserEntity> GetUserByNameAndPasswordAsync(string userName, string password);    
     }
 }

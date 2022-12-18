@@ -1,6 +1,7 @@
 ﻿using Infrastructuur.extensions;
 using Infrastructuur.Models;
 using Infrastructuur.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +27,7 @@ namespace StoryShop.Controllers
             return View(stories);
         }
         //admin list
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<IActionResult> AdminList()
         {
             var stories = (await _storyZonService.GetStoryzonsAsync()).ToList();
@@ -66,7 +68,7 @@ namespace StoryShop.Controllers
         {
             return View(await _storyZonService.GetStoryzonByIdAsync(id));
         }
-
+        [Authorize(Roles = "Admin,SuperAdmin")]
         // GET: StoryController/Create
         public ActionResult Create()
         {
@@ -74,6 +76,7 @@ namespace StoryShop.Controllers
         }
 
         // POST: StoryController/Create
+        [Authorize(Roles = "Admin,SuperAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(StoryzonEntity storyzon,IFormFile fileImage)
@@ -94,6 +97,7 @@ namespace StoryShop.Controllers
         }
 
         // GET: StoryController/Edit/5
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<ActionResult> Edit(string id)
         {
             return View(await _storyZonService.GetStoryzonByIdAsync(id));
@@ -102,6 +106,7 @@ namespace StoryShop.Controllers
         // POST: StoryController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<ActionResult> Edit(string id, StoryzonEntity storyzon, IFormFile image)
         {
             try
@@ -118,12 +123,14 @@ namespace StoryShop.Controllers
         }
 
         // GET: StoryController/Delete/5
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<ActionResult> Delete(string id)
         {
             return View(await _storyZonService.GetStoryzonByIdAsync(id));
         }
 
         // POST: StoryController/Delete/5
+        [Authorize(Roles = "Admin,SuperAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(string id, StoryzonEntity storyzon)
@@ -142,9 +149,17 @@ namespace StoryShop.Controllers
         //write to excell
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<IActionResult> WriteToExcel()
         {
-            if((await _storyZonService.GetStoryzonsAsync()).ToList().WriteStoryDataToExcell())
+           
+            if((await _storyZonService.GetStoryzonsAsync()).ToList().WriteDataToExcel<StoryzonEntity>("StoryData.xls" , new Dictionary<string, string>
+            {
+                {"Title","Title" },
+                {"Genre","Genre" },
+                {"Rating","Rating" },
+                {"AddedDate","AddedDate" }
+            }))
             {
                 return RedirectToAction(nameof(AdminList));
             }

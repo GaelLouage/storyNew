@@ -23,29 +23,34 @@ namespace Infrastructuur.Services.Classes
             throw new NotImplementedException();
         }
 
-        public async Task<UserEntity> AddUserAsync(UserEntity user)
+        public async Task<bool> AddUserAsync(UserEntity user)
         {
-            if ((await _storyZonDbContext.GetAllAsync<UserEntity>("user"))
-                .Any(x => x.UserName == user.UserName ||
+            var users = (await _storyZonDbContext.GetAllAsync<UserEntity>("user"));
+
+            if (users.Any(x => x.UserName == user.UserName ||
                           (x.FirstName == user.FirstName &&
                           x.LastName == user.LastName) ||
                           x.Email == user.Email))
                 {
-                return user;
+                return false;
             }
-            return await _storyZonDbContext.CreateAsync<UserEntity>(user, "user", new MongoDB.Bson.BsonDocument
+            await _storyZonDbContext.CreateAsync<UserEntity>(user, "user", new MongoDB.Bson.BsonDocument
             {
                 { "userName", user.UserName},
                 { "firstName", user.FirstName},
                 { "lastName", user.LastName},
                 { "password", user.Password},
-                { "email", user.Email}
+                { "email", user.Email},
+                {"role", "User" }
             });
+            return (await _storyZonDbContext.GetAllAsync<UserEntity>("user")).Count() > users.Count(); 
         }
 
-        public Task<bool> DeleteUserByIdAsync(string id)
+        public async Task<bool> DeleteUserByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            var previousUserCount = (await GetUsersAsync()).Count;
+            await _storyZonDbContext.DeleteAsync<UserEntity>(id,"user", x => x.Id == id);
+            return (await GetUsersAsync()).Count > previousUserCount;
         }
 
         public Task<List<StoryzonEntity>> GetAllStoriesByUserIdAsync(string userId)
@@ -53,9 +58,16 @@ namespace Infrastructuur.Services.Classes
             throw new NotImplementedException();
         }
 
-        public Task<UserEntity> GetUserByIdAsync(string id)
+        public async Task<UserEntity> GetUserByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            return (await GetUsersAsync()).FirstOrDefault(x => x.Id == id);
+        }
+
+        public async Task<UserEntity> GetUserByNameAndPasswordAsync(string userName, string password)
+        {
+            return (await _storyZonDbContext.GetAllAsync<UserEntity>("user"))
+                .FirstOrDefault(x => x.UserName == userName && x.Password == password);
+                
         }
 
         public async Task<List<UserEntity>> GetUsersAsync()
@@ -68,9 +80,21 @@ namespace Infrastructuur.Services.Classes
             throw new NotImplementedException();
         }
 
-        public Task<UserEntity> UpdateUserByIdAsync(string id, UserEntity user)
+        public async Task<bool> UpdateUserByIdAsync(string id, UserEntity user)
         {
-            throw new NotImplementedException();
+            if(!(await _storyZonDbContext.UpdateAsync<UserEntity>(id, new Dictionary<string, string>()
+            {
+                {"userName", user.UserName },
+                {"firstName",user.FirstName},
+                {"lastName", user.LastName},
+                {"passWord", user.Password },
+                {"email", user.Email },
+                {"role", user.Role }
+            }, "user")))
+            {
+                return false;
+            }
+            return  true;
         }
     }
 }

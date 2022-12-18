@@ -29,5 +29,20 @@ namespace Infrastructuur.Models
         [JsonProperty("role")]
         public string Role { get; set; }
         public List<ReviewEntity>? Reviews { get; set; } = new List<ReviewEntity>();
+
+
+        public override bool Equals(Object obj)
+        {
+            //Check for null and compare run-time types.
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                UserEntity user = (UserEntity)obj;
+                return (UserName == user.UserName) && (Password == user.Password);
+            }
+        }
     }
 }

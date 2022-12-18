@@ -13,8 +13,7 @@ namespace Infrastructuur.extensions
 {
     public static  class ExcelSystem 
     {
-
-        public static bool WriteStoryDataToExcell(this List<StoryzonEntity> stories )
+        public static bool WriteDataToExcel<T>(this List<T> data, string fileName, Dictionary<string, string> columnNames)
         {
             try
             {
@@ -23,7 +22,6 @@ namespace Infrastructuur.extensions
                 // Create a new worksheet
                 // Create a new font and set its color to orange
                 var font = workbook.CreateFont();
-               
 
                 // Create a new cell style and set the font
                 var style = workbook.CreateCellStyle();
@@ -32,46 +30,41 @@ namespace Infrastructuur.extensions
                 style.SetFont(font);
                 var sheet = workbook.CreateSheet("Sheet1");
 
-
                 // Write the header row
                 var row = sheet.CreateRow(0);
-                var cell = row.CreateCell(0);
-                cell.SetCellValue("Title");
-                cell.CellStyle = style;
-                cell = row.CreateCell(1);
-                cell.SetCellValue("Genre");
-                cell.CellStyle = style;
-                cell = row.CreateCell(2);
-                cell.SetCellValue("Rating");
-                cell.CellStyle = style;
-                cell = row.CreateCell(3);
-                cell.SetCellValue("AddedDate");
-                cell.CellStyle = style;
-              
-                for (int i = 0; i < stories.Count; i++)
+                int cellIndex = 0;
+                foreach (var column in columnNames)
                 {
-                    row = sheet.CreateRow(i+1);
-                    row.CreateCell(0).SetCellValue(@stories[i].Title);
-                    row.CreateCell(1).SetCellValue(@stories[i].Genre);
-                    row.CreateCell(2).SetCellValue(@stories[i].Rating.ToString() ?? "no rating");
-                    row.CreateCell(3).SetCellValue(@stories[i].AddedDate);
+                    var cell = row.CreateCell(cellIndex);
+                    cell.SetCellValue(column.Value);
+                    cell.CellStyle = style;
+                    cellIndex++;
                 }
-                var fileName = $"StoryData.xls";
+
+                for (int i = 0; i < data.Count; i++)
+                {
+                    row = sheet.CreateRow(i + 1);
+                    cellIndex = 0;
+                    foreach (var column in columnNames)
+                    {
+                        var value = typeof(T).GetProperty(column.Key)?.GetValue(data[i]);
+                        row.CreateCell(cellIndex).SetCellValue(value?.ToString() ?? "no value");
+                        cellIndex++;
+                    }
+                }
 
                 // Save the workbook to a file
                 using (var fileStream = File.Create(fileName))
                 {
                     workbook.Write(fileStream);
-
                 }
                 return true;
             }
             catch
             {
-
                 return false;
             }
-       
         }
+     
     }
 }

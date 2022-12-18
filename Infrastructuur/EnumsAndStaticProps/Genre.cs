@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructuur.helpers
+namespace Infrastructuur.EnumsAndStaticProps
 {
     public static class Genre
     {

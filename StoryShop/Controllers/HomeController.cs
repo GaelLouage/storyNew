@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Infrastructuur.Models;
+using Microsoft.AspNetCore.Mvc;
 using StoryShop.Models;
 using System.Diagnostics;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace StoryShop.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
+      
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -25,21 +28,6 @@ namespace StoryShop.Controllers
         {
             return View();
         }
-        // login
-        public IActionResult Login()
-        {
-            return View();
-        }
-
-        // regiser
-        public IActionResult Register()
-        {
-            return View();
-        }
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+      
     }
 }
