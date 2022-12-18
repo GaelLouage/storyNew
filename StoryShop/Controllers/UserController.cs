@@ -1,5 +1,6 @@
 ﻿using Infrastructuur.EnumsAndStaticProps;
 using Infrastructuur.extensions;
+using Infrastructuur.helpers;
 using Infrastructuur.Models;
 using Infrastructuur.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
@@ -8,6 +9,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -33,9 +36,32 @@ namespace StoryShop.Controllers
         }
         // GET: UserController
         [Authorize(Roles = "Admin,SuperAdmin")]
-        public async Task<IActionResult> UserManagement()
+        public async Task<IActionResult> UserManagement(string filtering)
         {
-            return View((await _userService.GetUsersAsync()).ToList());
+            var users = (await _userService.GetUsersAsync()).ToList();
+            switch (filtering)
+            {
+                case "UserName":
+                    users = users.OrderBy(x => x.UserName).ToList();
+                    break;
+                case "FirstName":
+                    users = users.OrderBy(x => x.FirstName).ToList();
+                    break;
+                case "LastName":
+                    users = users.OrderBy(x => x.LastName).ToList();
+                    break;
+                case "Email":
+                    users = users.OrderBy(x => x.Email).ToList();
+                    break;
+                case "Role":
+                    users = users.OrderBy(x => x.Role).ToList();
+                    break;
+                default:
+                    users = (await _userService.GetUsersAsync()).ToList();
+                    break;
+            }
+          
+            return View(users);
         }
         // GET: UserController/Details/5
         public async Task<ActionResult> Details(string id)
@@ -82,6 +108,7 @@ namespace StoryShop.Controllers
         {
             try
             {
+                user.Password = user.Password.HashToPassword();
                 await _userService.UpdateUserByIdAsync(id, user);
                 return RedirectToAction(nameof(UserManagement));
             }
@@ -235,5 +262,27 @@ namespace StoryShop.Controllers
             }
             return RedirectToAction(nameof(UserManagement));
         }
+
+        //public async Task<IActionResult> PasswordReseter(string email)
+        //{
+        //    var userByEmail = (await _userService.GetUsersAsync())
+        //        .FirstOrDefault(x => x.Email == email);
+    
+        //    var credentials = ReadJson.GetEmailCredentials(@"C:/Users/louag/Desktop/storyContactCredentials/credentials.json");
+        
+        //    MailMessage message = new MailMessage();
+        //    message.From = new MailAddress(credentials.EmailAddress);
+        //    message.To.Add(email);
+        //    message.Subject = "password";
+        //    message.Body = userByEmail.Password;
+
+        //    // Set the server details
+        //    SmtpClient smtpClient = new SmtpClient();
+        //    smtpClient.Host = "smtp.office365.com";
+        //    smtpClient.Port = 587;
+        //    smtpClient.EnableSsl = true;
+        //    smtpClient.Credentials = new NetworkCredential(credentials.EmailAddress, credentials.PassWord);
+        //    return RedirectToAction(nameof(Login));
+        //}
     }
 }

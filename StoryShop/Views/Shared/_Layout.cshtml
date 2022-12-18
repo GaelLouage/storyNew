@@ -39,9 +39,6 @@
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li class="scroll-to-section"><a asp-action="Index" asp-controller="Story" class="active">Home</a></li>
-                            <li class="scroll-to-section"><a href="#men">Adventure</a></li>
-                            <li class="scroll-to-section"><a href="#women">Action</a></li>
-                            <li class="scroll-to-section"><a href="#kids">Horror</a></li>
                             <li class="scroll-to-section"><a asp-action="Stories" asp-controller="Story">Stories</a></li>
                             <li class="submenu">
                                 <a href="javascript:;">Info</a>
@@ -99,25 +96,22 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-lg-6">
-                    <h4>Categories</h4>
+                    <h4>Pages</h4>
                     <ul>
-                        <li><a href="#men">Adventure</a></li>
-                        <li><a href="#woman">Action</a></li>
-                        <li><a href="#kids">Horror</a></li>
+                        <li><a asp-action="Index" asp-controller="Story">Home</a></li>
+                        <li><a asp-action="Stories" asp-controller="Story">Stories</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-6">
                     <h4>Useful Links</h4>
                     <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a asp-action="About" asp-controller="Home">About Us</a></li>
+                        <li><a asp-action="Contact" asp-controller="Home">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-12">
                     <div class="under-footer">
                         <ul>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                             <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                         </ul>
                     </div>

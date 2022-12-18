@@ -36,6 +36,36 @@
                         </div>
         </div>
 		@*<p class="small text-center">By clicking the Sign Up button, you agree to our <br><a href="#">Terms &amp; Conditions</a>, and <a href="#">Privacy Policy</a>.</p>*@
+
+@*		<div class="text-center" >Forgot password? <a class="pointer" data-toggle="modal" data-target="#exampleModal">Click here</a>.</div>*@
     </form>
+    <!-- Button trigger modal -->
+
 	</div>
 </div>
+
+
+@*
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Send password to email</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+            <form asp-action="PasswordReseter" asp-controller="User" method="post">
+      <div class="modal-body">
+     <input type="email" name="email" placeholder="E-mail address here" class="form-control"/>
+
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn bg-black text-white" data-dismiss="modal">Send</button>
+        <button type="button" class="btn bg-black text-white">Close</button>
+      </div>
+           </form>
+    </div>
+  </div>
+</div>*@

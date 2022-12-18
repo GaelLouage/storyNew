@@ -28,9 +28,27 @@ namespace StoryShop.Controllers
         }
         //admin list
         [Authorize(Roles = "Admin,SuperAdmin")]
-        public async Task<IActionResult> AdminList()
+        public async Task<IActionResult> AdminList(string filtering)
         {
             var stories = (await _storyZonService.GetStoryzonsAsync()).ToList();
+            switch (filtering)
+            {
+                case "Title":
+                    stories = stories.OrderBy(x => x.Title).ToList();
+                    break;
+                case "Genre":
+                    stories = stories.OrderBy(x => x.Genre).ToList();
+                    break;
+                case "Rating":
+                    stories = stories.OrderBy(x => x.Rating).ToList();
+                    break;
+                case "AddedDate":
+                    stories = stories.OrderBy(x => x.AddedDate).ToList();
+                    break;
+                default:
+                    stories = (await _storyZonService.GetStoryzonsAsync()).ToList();
+                    break;
+            }
             return View(stories);
         }
         // GET: getallstories
@@ -59,7 +77,7 @@ namespace StoryShop.Controllers
                     stories = (await _storyZonService.GetStoryzonsAsync()).Take(6).ToList();
                     break;
             }
-           
+
             return View(stories);
         }
 
@@ -79,7 +97,7 @@ namespace StoryShop.Controllers
         [Authorize(Roles = "Admin,SuperAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(StoryzonEntity storyzon,IFormFile fileImage)
+        public async Task<IActionResult> Create(StoryzonEntity storyzon, IFormFile fileImage)
         {
             try
             {
@@ -152,8 +170,8 @@ namespace StoryShop.Controllers
         [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<IActionResult> WriteToExcel()
         {
-           
-            if((await _storyZonService.GetStoryzonsAsync()).ToList().WriteDataToExcel<StoryzonEntity>("StoryData.xls" , new Dictionary<string, string>
+
+            if ((await _storyZonService.GetStoryzonsAsync()).ToList().WriteDataToExcel<StoryzonEntity>("StoryData.xls", new Dictionary<string, string>
             {
                 {"Title","Title" },
                 {"Genre","Genre" },

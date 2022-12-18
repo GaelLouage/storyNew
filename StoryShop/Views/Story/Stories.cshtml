@@ -1,14 +1,17 @@
-﻿@using Infrastructuur.Models
+﻿@using Infrastructuur.EnumsAndStaticProps
+@using Infrastructuur.Models
 @model IEnumerable<Infrastructuur.Models.StoryzonEntity>
 
 @{
     ViewData["Title"] = "Stories";
-       var stories =  ViewData["stoyList"] as List<StoryzonEntity>;
+    var stories = ViewData["stoyList"] as List<StoryzonEntity>;
 }
+
 
 <hr />
 
 <section class="section" id="products">
+
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -126,5 +129,5 @@
             </div>
         </div>
     </div>
-   
+
 </section>

@@ -1,16 +1,16 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
@@ -22,30 +22,42 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 .top-buttons {
     width: 70em;
     display: flex;
-
 }
+
     .top-buttons form {
         width: 70em;
         padding-left: 2em;
     }
+
 @media (max-width: 575px) {
     .mobile-w-50 {
         width: 50% !important;
     }
+
     .top-buttons {
         display: flex !important;
         flex-direction: row;
     }
-    .baar{
-        display:none;
+
+    .baar {
+        display: none;
     }
+}
+
+.filter-form {
+    display: flex;
+ 
+}
+
+.filter-form select{
+   height: 3em;
 }
 
 .login-container {
     margin-top: 180em !important;
     padding-top: 180em !important;
 }
-
