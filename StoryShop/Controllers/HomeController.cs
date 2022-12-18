@@ -28,6 +28,14 @@ namespace StoryShop.Controllers
         {
             return View();
         }
-      
+        public IActionResult Contact()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Contact(string message)
+        {
+            return View();
+        }
     }
 }

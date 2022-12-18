@@ -42,12 +42,12 @@
                             <li class="scroll-to-section"><a href="#men">Adventure</a></li>
                             <li class="scroll-to-section"><a href="#women">Action</a></li>
                             <li class="scroll-to-section"><a href="#kids">Horror</a></li>
-                            <li class="scroll-to-section"><a href="#kids">Stories</a></li>
+                            <li class="scroll-to-section"><a asp-action="Stories" asp-controller="Story">Stories</a></li>
                             <li class="submenu">
                                 <a href="javascript:;">Info</a>
                                 <ul>
                                     <li><a asp-action="About" asp-controller="Home">About</a></li>
-                                    <li><a href="contact.html">Contact Us</a></li>
+                                    <li><a asp-action="Contact" asp-controller="Home">Contact Us</a></li>
                                 </ul>
                             </li>
 
@@ -72,7 +72,7 @@
                             else
                             {
                                 <li><a asp-action="Login" asp-controller="User">Login</a></li>
-                                <li class="pt-2 baar">|</li>
+                              @*  <li class="pt-2 baar">|</li>*@
                                 <li><a asp-action="Register" asp-controller="User">Register</a></li>
 
                                 @*
