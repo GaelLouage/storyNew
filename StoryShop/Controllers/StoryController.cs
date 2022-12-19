@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Speech.Synthesis;
 
 namespace StoryShop.Controllers
 {
@@ -14,24 +15,31 @@ namespace StoryShop.Controllers
         private readonly IStoryZonService _storyZonService;
         private readonly IFileService _fileService;
         private readonly IUserService _userService;
-        private readonly UserSingleton _userSingleton;
         private readonly IReviewService _reviewService;
+        private readonly  SpeechSynthesizer _synthesizer;
+        private readonly UserSingleton _userSingleton;
         private static string? detailId;
-        public StoryController(IStoryZonService storyZonService, IFileService fileService, IUserService userService, UserSingleton userSingleton, IReviewService reviewService)
+        public static bool isPlay = false;
+
+        public StoryController(IStoryZonService storyZonService, IFileService fileService, IUserService userService, UserSingleton userSingleton, IReviewService reviewService, SpeechSynthesizer synthesizer)
         {
             _storyZonService = storyZonService;
             _fileService = fileService;
             _userService = userService;
             _userSingleton = userSingleton;
             _reviewService = reviewService;
+            _synthesizer = synthesizer;
+             _synthesizer.SpeakAsyncCancelAll();
+
         }
 
         // GET: StoryController
         public async Task<ActionResult> Index()
         {
-            var stories = await _storyZonService.GetStoryzonsAsync();
+            
+             var stories = await _storyZonService.GetStoryzonsAsync();
             _userSingleton.User = (await _userService.GetUsersAsync()).FirstOrDefault(x => x.Email == HttpContext?.User?.FindFirst(ClaimTypes.Email)?.Value);
-  
+            ViewData["reviews"] = (await _reviewService.GetReviews());
             ViewData["topStories"] = stories;
             return View(stories);
         }
@@ -101,6 +109,7 @@ namespace StoryShop.Controllers
         // GET: StoryController/Details/5
         public async Task<ActionResult> Details(string id)
         {
+
             if (!User.Identity.IsAuthenticated) return RedirectToAction("Login" , "User");
             detailId = id;
             var reviews = await _reviewService.GetReviewsByStoryId(id);
@@ -114,7 +123,7 @@ namespace StoryShop.Controllers
         }
         [Authorize(Roles = "Admin,SuperAdmin")]
         // GET: StoryController/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
             return View();
         }
@@ -223,6 +232,45 @@ namespace StoryShop.Controllers
             review.UserId = _userSingleton.User.Id;
             var reviewToAdd = await _reviewService.AddReview(review);
             return RedirectToAction(nameof(Details), new { id = detailId });
+        }
+        public IActionResult TextToSpeach(string textToRead)
+        {
+            isPlay = !isPlay;
+            if (isPlay)
+            {
+                SynthesizeState(textToRead);
+            }
+            else
+            {
+                if (_synthesizer.State == SynthesizerState.Paused)
+                {
+                    _synthesizer.Resume();
+                }
+            }
+            
+            return RedirectToAction(nameof(Details), new { id = detailId });
+        }
+
+        private void SynthesizeState(string? textToRead = null)
+        {
+            // Cancel the speech synthesis
+       
+            if (_synthesizer.State != SynthesizerState.Speaking && _synthesizer.State != SynthesizerState.Paused)
+            {
+                try
+                {
+                    _synthesizer.SelectVoiceByHints(VoiceGender.Female);
+                    _synthesizer.Rate = 1;
+                    _synthesizer.Speak(textToRead);
+                } catch
+                {
+
+                }
+            }
+            else
+            {
+                _synthesizer.Pause();
+            }
         }
     }
 }

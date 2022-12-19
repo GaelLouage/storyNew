@@ -16,7 +16,9 @@ html {
 body {
     margin-bottom: 60px;
 }
-
+.orange-star {
+    color: orange;
+}
 .banner-img {
     background-image: url("../Images/StoryzonBanner.jpg");
     background-repeat: no-repeat;

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "1DXRwPgX5KobYxMPEXOlQ/pSnBHsS2adh4uPiLOUhem6Fl0dT4ypfYAleM6eSg8DbaVu5kuM68kzYdX7tLXJ5Q==",
+  "dgSpecHash": "ebtw73XjhCbLYgu93d3pydTS4BjZdKXn4a0TSGeClZMC1rPfC9wYi3qgMICnsdtdd7YOms0v3WwCbk/CvmOstw==",
   "success": true,
   "projectFilePath": "C:\\Users\\louag\\Desktop\\storyzon\\Story\\StoryShop\\StoryShop.csproj",
   "expectedPackageFiles": [
@@ -187,6 +187,7 @@
     "C:\\Users\\louag\\.nuget\\packages\\system.security.cryptography.xml\\6.0.1\\system.security.cryptography.xml.6.0.1.nupkg.sha512",
     "C:\\Users\\louag\\.nuget\\packages\\system.security.permissions\\6.0.0\\system.security.permissions.6.0.0.nupkg.sha512",
     "C:\\Users\\louag\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512",
+    "C:\\Users\\louag\\.nuget\\packages\\system.speech\\7.0.0\\system.speech.7.0.0.nupkg.sha512",
     "C:\\Users\\louag\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
     "C:\\Users\\louag\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512",
     "C:\\Users\\louag\\.nuget\\packages\\system.text.encoding.extensions\\4.3.0\\system.text.encoding.extensions.4.3.0.nupkg.sha512",

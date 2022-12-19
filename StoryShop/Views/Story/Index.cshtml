@@ -15,8 +15,19 @@
     List<StoryzonEntity> GetListFromGenre(string genre) =>
             stories?.Where(x => x.Genre.Contains(genre)).ToList();
 
-
+    var reviews = ViewData["reviews"] as List<ReviewEntity>;
     var storyDelete = ViewData["storyDeleted"] as string;
+
+    double GetAverage(string storyId)
+    {
+        if (reviews is null) return 0;
+        var rating = @reviews.Where(x => x.StoryId == storyId).Sum(x => int.Parse(x.Rating));
+        if(rating !=  0)
+        {
+            return rating / @reviews.Where(x => x.StoryId == storyId).Count();
+        } 
+        return 0;
+    }
 }
 
 @*@if (User.IsInRole("Admin"))
@@ -116,7 +127,7 @@
                                 <ul class="stars d-flex">
                                     @for (int i = 0; i < 5; i++)
                                     {
-                                        if (@story.Rating > i)
+                                        if (GetAverage(story.Id) > i)
                                         {
                                             <li><i class="fa fa-star" style="color:orange;"></i></li>
                                         }
@@ -169,7 +180,7 @@
                                 <ul class="stars d-flex">
                                     @for (int i = 0; i < 5; i++)
                                     {
-                                        if (@story.Rating > i)
+                                        if (GetAverage(story.Id) > i)
                                         {
                                             <li><i class="fa fa-star" style="color:orange;"></i></li>
                                         }
@@ -224,7 +235,7 @@
                                 <ul class="stars d-flex">
                                     @for (int i = 0; i < 5; i++)
                                     {
-                                        if (@story.Rating > i)
+                                        if (GetAverage(story.Id) > i)
                                         {
                                             <li><i class="fa fa-star" style="color:orange;"></i></li>
                                         }
@@ -242,3 +253,4 @@
         </div>
     </div>
 </section>
+

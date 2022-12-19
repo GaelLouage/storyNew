@@ -3,6 +3,8 @@ using Infrastructuur.Services.Classes;
 using Infrastructuur.Services.Interfaces;
 using Infrastructuur.singleton;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using StoryShop.Speech;
+using System.Speech.Synthesis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +13,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 /*user singleton*/
 builder.Services.AddSingleton<UserSingleton>();
+builder.Services.AddSingleton<SpeechSynthesizer>(SynthesizerSingleton.Instance);
 builder.Services.AddSingleton(new StoryZonDbContext());
+
 builder.Services.AddScoped<IStoryZonService, StoryzonService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IFileService, FileService>();

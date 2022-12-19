@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructuur.singleton
 {
-    public sealed class UserSingleton : ControllerBase
+    public sealed class UserSingleton 
     {
         /*A singleton is a design pattern that ensures that a class has only one instance and provides a global point of access to it. 
          * Here is an example of how you can implement a singleton in C#:*/

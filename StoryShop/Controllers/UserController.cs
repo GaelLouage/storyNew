@@ -14,6 +14,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Speech.Synthesis;
 using System.Text;
 
 namespace StoryShop.Controllers
@@ -23,11 +24,14 @@ namespace StoryShop.Controllers
         private readonly IUserService _userService;
         private readonly ILogger<UserController> _logger;
         private readonly UserSingleton _userSingleton;
-        public UserController(IUserService userService, ILogger<UserController> logger, UserSingleton userSingleton)
+        private readonly SpeechSynthesizer _synthesizer;
+        public UserController(IUserService userService, ILogger<UserController> logger, UserSingleton userSingleton, SpeechSynthesizer synthesizer)
         {
             _userService = userService;
             _logger = logger;
             _userSingleton = userSingleton;
+            _synthesizer = synthesizer;
+            _synthesizer.SpeakAsyncCancelAll();
         }
 
         // GET: UserController

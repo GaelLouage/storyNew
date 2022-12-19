@@ -17,8 +17,7 @@ namespace Infrastructuur.Models
 
         [JsonProperty("reviewBody")]
         public string ReviewBody { get; set; }
-        [JsonProperty("reviewRating")]
-        public string ReviewRating { get; set; }
+     
 
         [JsonProperty("userId")]
         public string UserId { get; set; }

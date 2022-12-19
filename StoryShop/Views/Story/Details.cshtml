@@ -1,4 +1,5 @@
 ﻿@using Infrastructuur.Models
+@using StoryShop.Controllers
 @model Infrastructuur.Models.StoryzonEntity
 
 @{
@@ -6,6 +7,9 @@
     var storyDelete = ViewData["storyDeleted"] as string;
     var reviews = ViewData["reviews"] as List<ReviewEntity>;
     var users = ViewData["users"] as List<UserEntity>;
+    int starValue = 0;
+    var stateSoundButton = ViewData["buttonChangeClass"] as string;
+    var isPlaying = StoryController.isPlay;
 }
 <div class="contact-us pt-5">
     @if (!string.IsNullOrEmpty(storyDelete))
@@ -26,15 +30,25 @@
         <div class="row ">
             <div class="col-lg-6 align-baseline">
                 <p class=" mt-5">@Model.BodyEn</p>
+
             </div>
             <div class="col-lg-6 w-100 mt-5">
                 <img class="w-100 mt-2" src="~/@Model.Image" />
+                <form asp-action="TextToSpeach">
+                    <input name="textToRead" value="@Model.BodyEn" hidden />
+                    @if(!isPlaying)
+                    {
+                            <button class="rounded-pill  mt-5" type="submit"><i class="fa fa-play"></i></button>
+                    } else
+                    {
+                            <button class="rounded-pill  mt-5" type="submit"><i class="fa fa-pause"></i></button>
+                    }
+                
+                </form>
             </div>
         </div>
     </div>
 </div>
-
-
 
 <div class="contact-us">
     <div class="container">
@@ -50,24 +64,24 @@
 
                             <h3 class="mt-5">@review.ReviewTitle</h3>
                             <div class="d-flex">
-                            <div class="col-lg-6">
-                                <h5 class="mt-2">@users.FirstOrDefault(x => x.Id == review.UserId).UserName</h5>
-                            </div>
-                            <div class="col-lg-6 align-baseline">
-                                <ul class="stars d-flex mt-2">
-                                    @for (int i = 0; i < 5; i++)
-                                    {
-                                        if (int.Parse(review.Rating) > i)
+                                <div class="col-lg-6">
+                                    <h5 class="mt-2">@users.FirstOrDefault(x => x.Id == review.UserId).UserName</h5>
+                                </div>
+                                <div class="col-lg-6 align-baseline">
+                                    <ul class="stars d-flex mt-2">
+                                        @for (int i = 0; i < 5; i++)
                                         {
-                                            <li><i class="fa fa-star" style="color:orange;"></i></li>
+                                            if (int.Parse(review.Rating) > i)
+                                            {
+                                                <li><i class="fa fa-star orange-star"></i></li>
+                                            }
+                                            else
+                                            {
+                                                <li><i class="fa fa-star checked"></i></li>
+                                            }
                                         }
-                                        else
-                                        {
-                                            <li><i class="fa fa-star checked"></i></li>
-                                        }
-                                    }
-                                </ul>
-                            </div>
+                                    </ul>
+                                </div>
                             </div>
                             <p>@review.ReviewBody</p>
 
@@ -91,7 +105,13 @@
                         </div>
                         <div class="col-lg-6">
                             <fieldset>
-                                <input name="rating" type="text" id="name" placeholder="Your rating" required="">
+                                <ul class="stars d-flex mt-2">
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        <li><i class="star fa fa-star" onclick="starClick(@i)" style="cursor:pointer;font-size: 24px;"></i></li>
+                                    }
+                                </ul>
+                                <input name="rating" type="text" id="rating" placeholder="Your rating" required="" hidden>
                             </fieldset>
                         </div>
                         <div class="col-lg-12">
@@ -111,3 +131,17 @@
     </div>
 </div>
 
+<script>
+    var stars = document.querySelectorAll(".star");
+    var starInput = document.querySelector("#rating");
+    function starClick(elements) {
+        for (let i = 0; i < elements; i++) {
+            stars[i].style.color = 'orange';
+
+        }
+        for (let i = elements; i < stars.length; i++) {
+            stars[i].style.color = '';
+        }
+        starInput.value = elements;
+    }
+</script>
