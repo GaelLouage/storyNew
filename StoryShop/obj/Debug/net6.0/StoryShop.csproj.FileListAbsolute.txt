@@ -483,7 +483,6 @@ C:\Users\louag\Desktop\storyzon\Story\StoryShop\bin\Debug\net6.0\runtimes\win\li
 C:\Users\louag\Desktop\storyzon\Story\StoryShop\bin\Debug\net6.0\runtimes\linux\native\libmongocrypt.so
 C:\Users\louag\Desktop\storyzon\Story\StoryShop\bin\Debug\net6.0\runtimes\osx\native\libmongocrypt.dylib
 C:\Users\louag\Desktop\storyzon\Story\StoryShop\bin\Debug\net6.0\runtimes\win\native\mongocrypt.dll
-C:\Users\louag\Desktop\storyzon\Story\StoryShop\bin\Debug\net6.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
 C:\Users\louag\Desktop\storyzon\Story\StoryShop\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 C:\Users\louag\Desktop\storyzon\Story\StoryShop\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\louag\Desktop\storyzon\Story\StoryShop\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
@@ -536,3 +535,9 @@ C:\Users\louag\Desktop\storyzon\Story\StoryShop\bin\Debug\net6.0\Microsoft.DotNe
 C:\Users\louag\Desktop\storyzon\Story\StoryShop\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
 C:\Users\louag\Desktop\storyzon\Story\StoryShop\bin\Debug\net6.0\System.Speech.dll
 C:\Users\louag\Desktop\storyzon\Story\StoryShop\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Speech.dll
+C:\Users\louag\Desktop\storyzon\Story\StoryShop\bin\Debug\net6.0\PdfSharp.Charting.dll
+C:\Users\louag\Desktop\storyzon\Story\StoryShop\bin\Debug\net6.0\PdfSharp.dll
+C:\Users\louag\Desktop\storyzon\Story\StoryShop\bin\Debug\net6.0\de\PdfSharp.Charting.resources.dll
+C:\Users\louag\Desktop\storyzon\Story\StoryShop\bin\Debug\net6.0\de\PdfSharp.resources.dll
+C:\Users\louag\Desktop\storyzon\Story\StoryShop\bin\Debug\net6.0\System.Text.Encoding.CodePages.dll
+C:\Users\louag\Desktop\storyzon\Story\StoryShop\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Text.Encoding.CodePages.dll

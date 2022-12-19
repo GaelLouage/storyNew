@@ -6,12 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Infrastructuur.helpers;
 namespace Infrastructuur.Database
 {
     public class StoryZonDbContext
     {
-        private MongoClient dbClient = new MongoClient("mongodb+srv://StoryApi:Toyakes08@cluster0.t0jd6kw.mongodb.net/?retryWrites=true&w=majority");
+        private MongoClient dbClient = new MongoClient(ReadJson.ConnectionString().ConnectionString);
         public async Task<T> GetByIdAsync<T>(Func<T, bool> predicate, string collection) where T : class
         {
             var data = (await GetAllAsync<T>(collection)).FirstOrDefault(predicate);

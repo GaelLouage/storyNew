@@ -67,7 +67,7 @@
                     {
                         <tr>
                             <td>@tableCounter</td>
-                            <td><a asp-action="Details" asp-route-id="@story.Id"><img src="~/@story.Image" class="avatar" style="width:3em" alt="Avatar">  @story.Title</a></td>
+                            <td><img src="~/@story.Image" class="avatar" style="width:3em" alt="@story.Title">  @story.Title</td>
                             <td>@story.Genre</td>
                             @if (string.IsNullOrEmpty(@story.Rating.ToString()))
                             {

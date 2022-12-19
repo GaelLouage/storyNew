@@ -1,4 +1,5 @@
-﻿@using Infrastructuur.Models
+﻿@using Infrastructuur.EnumsAndStaticProps
+@using Infrastructuur.Models
 @using StoryShop.Controllers
 @model Infrastructuur.Models.StoryzonEntity
 
@@ -6,7 +7,7 @@
     ViewData["Title"] = "Details";
     var storyDelete = ViewData["storyDeleted"] as string;
     var reviews = ViewData["reviews"] as List<ReviewEntity>;
-    var users = ViewData["users"] as List<UserEntity>;
+    var users = ViewData["usersRevs"] as List<UserEntity>;
     int starValue = 0;
     var stateSoundButton = ViewData["buttonChangeClass"] as string;
 
@@ -34,12 +35,24 @@
             </div>
             <div class="col-lg-6 w-100 mt-5">
                 <img class="w-100 mt-2" src="~/@Model.Image" />
-                <form asp-action="TextToSpeach">
-                    <input name="textToRead" value="@Model.BodyEn" hidden />
+                <div class="d-flex">
+                    <form class="mr-2" asp-action="TextToSpeach">
+                        <input name="textToRead" value="@Model.BodyEn" hidden />
 
-                     <button class="rounded-pill  mt-5 playButton" type="submit"><i class="fa fa-volume-up"></i></button>
+                        <button class="rounded-pill  mt-5 playButton" type="submit"><i class="fa fa-volume-up"></i></button>
 
-                </form>
+                    </form>
+                    @if (User.IsInRole(Role.Admin) || User.IsInRole(Role.SuperAdmin) || User.IsInRole(Role.Vip))
+                    {
+                        <form asp-action="CreatePdf">
+                            <input asp-for="@Model.Title" value="@Model.Title" hidden />
+                            <input asp-for="@Model.BodyEn" value="@Model.BodyEn" hidden />
+                            <input asp-for="@Model.Image" value="@Model.Image" hidden />
+                            <button class="rounded-pill  mt-5 playButton" type="submit"><i class="fa fa-download"></i></button>
+                        </form>
+                    }
+                </div>
+
             </div>
         </div>
     </div>
@@ -52,15 +65,16 @@
                 <div class="section-heading">
                     <h2>Reviews</h2>
                     <span class="mb-3">@Model.Title Reviews</span>
+                    <hr />
                     @if (reviews is not null)
                     {
                         @foreach (var review in reviews)
                         {
-
-                            <h3 class="mt-5">@review.ReviewTitle</h3>
                             <div class="d-flex">
-                                <div class="col-lg-6">
-                                    <h5 class="mt-2">@users.FirstOrDefault(x => x.Id == review.UserId).UserName</h5>
+                                <div class="col-lg-6 ">
+                                   <h6 class="mt-2">
+                                       @users.FirstOrDefault(x => x.Id == review.UserId).UserName
+                                   </h6>
                                 </div>
                                 <div class="col-lg-6 align-baseline">
                                     <ul class="stars d-flex mt-2">
@@ -77,6 +91,11 @@
                                         }
                                     </ul>
                                 </div>
+                            </div>
+
+                            <div class="d-flex">
+                                <h3 class="mt-2 mb-2 col-lg-12">@review.ReviewTitle</h3>
+
                             </div>
                             <p>@review.ReviewBody</p>
 

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "HAekdHj4753nKL5cl5zLbSz/5Yrr6oHxQAA2w9E1a14=",
+  "Hash": "BEcDCrOxUW6+rgC0sBafUkZUS0Vlyq2G65R+seTLMWE=",
   "Source": "StoryShop",
   "BasePath": "_content/StoryShop",
   "Mode": "Default",
@@ -374,6 +374,23 @@
       "OriginalItemSpec": "wwwroot\\Images\\EscapefromtheIslandofDoom.jpg"
     },
     {
+      "Identity": "C:\\Users\\louag\\Desktop\\storyzon\\Story\\StoryShop\\wwwroot\\Images\\Gael.jpg",
+      "SourceId": "StoryShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\louag\\Desktop\\storyzon\\Story\\StoryShop\\wwwroot\\",
+      "BasePath": "_content/StoryShop",
+      "RelativePath": "Images/Gael.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\Gael.jpg"
+    },
+    {
       "Identity": "C:\\Users\\louag\\Desktop\\storyzon\\Story\\StoryShop\\wwwroot\\Images\\header.PNG",
       "SourceId": "StoryShop",
       "SourceType": "Discovered",
@@ -423,6 +440,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\indianAdventure.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\louag\\Desktop\\storyzon\\Story\\StoryShop\\wwwroot\\Images\\koffie.jpg",
+      "SourceId": "StoryShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\louag\\Desktop\\storyzon\\Story\\StoryShop\\wwwroot\\",
+      "BasePath": "_content/StoryShop",
+      "RelativePath": "Images/koffie.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\koffie.jpg"
     },
     {
       "Identity": "C:\\Users\\louag\\Desktop\\storyzon\\Story\\StoryShop\\wwwroot\\Images\\StoryzonBanner.jpg",

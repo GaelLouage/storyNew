@@ -54,7 +54,7 @@
                                 </ul>
                             </li>
 
-                            @if (User.IsInRole(Role.Admin) || User.IsInRole(Role.User) || User.IsInRole(Role.SuperAdmin))
+                            @if (User.IsInRole(Role.Admin) || User.IsInRole(Role.User) || User.IsInRole(Role.SuperAdmin) || User.IsInRole(Role.Vip))
                             {
                                   <li class="scroll-to-section"><a href="#kids">Welcome @User.Identity.Name</a></li>
                                    <li class="submenu">

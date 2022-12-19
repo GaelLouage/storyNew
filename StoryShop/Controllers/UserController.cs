@@ -25,13 +25,15 @@ namespace StoryShop.Controllers
         private readonly ILogger<UserController> _logger;
         private readonly UserSingleton _userSingleton;
         private readonly SpeechSynthesizer _synthesizer;
-        public UserController(IUserService userService, ILogger<UserController> logger, UserSingleton userSingleton, SpeechSynthesizer synthesizer)
+        private readonly IReviewService _reviewService;
+        public UserController(IUserService userService, ILogger<UserController> logger, UserSingleton userSingleton, SpeechSynthesizer synthesizer, IReviewService reviewService)
         {
             _userService = userService;
             _logger = logger;
             _userSingleton = userSingleton;
             _synthesizer = synthesizer;
             _synthesizer.SpeakAsyncCancelAll();
+            _reviewService = reviewService;
         }
 
         // GET: UserController
@@ -114,6 +116,8 @@ namespace StoryShop.Controllers
         [Authorize(Roles = "Admin,SuperAdmin,User")]
         public async Task<ActionResult> Edit(string id)
         {
+            var user = await _userService.GetUserByIdAsync(id);
+            ViewData["currentUser"] = _userSingleton.User;
             return View(await _userService.GetUserByIdAsync(id));
         }
 
@@ -125,7 +129,16 @@ namespace StoryShop.Controllers
         {
             try
             {
-                user.Password = user.Password.HashToPassword();
+                var userToUpdate = await _userService.GetUserByIdAsync(id);
+                if(_userSingleton.User.Id != userToUpdate.Id)
+                {
+                    user.Password = userToUpdate.Password.HashToPassword();
+                } else
+                {
+                    user.Password = user.Password.HashToPassword();
+                }
+             
+
                 await _userService.UpdateUserByIdAsync(id, user);
                 var userRole = _userSingleton.User;
 
@@ -156,6 +169,14 @@ namespace StoryShop.Controllers
             try
             {
                 await _userService.DeleteUserByIdAsync(id);
+                var reviews = (await _reviewService.GetReviews())
+                    .Where(x => x.UserId == id);
+           
+                foreach (var review in reviews)
+                {
+                    await _reviewService.RemoveReview(review.ReviewId);
+                }
+              
                 return RedirectToAction(nameof(UserManagement));
             }
             catch

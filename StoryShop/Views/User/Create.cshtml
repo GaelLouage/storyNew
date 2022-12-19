@@ -41,7 +41,7 @@
                                 <span asp-validation-for="LastName" class="text-danger"></span>
                             </fieldset>
                         </div>
-                          <div class="col-lg-12 mt-5">
+                        <div class="col-lg-12 mt-5">
                             <fieldset>
                                 <input asp-for="Email" type="email" class="form-control" placeholder="Email" />
                                 <span asp-validation-for="Email" class="text-danger"></span>
@@ -65,6 +65,7 @@
                                     <option value=@Role.SuperAdmin>@Role.SuperAdmin</option>
                                     <option value=@Role.Admin>@Role.Admin</option>
                                     <option value=@Role.User>@Role.User</option>
+                                    <option value=@Role.Vip>@Role.Vip</option>
                                 </select>
                             </fieldset>
                         </div>

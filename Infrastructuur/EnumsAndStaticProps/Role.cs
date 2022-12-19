@@ -11,5 +11,6 @@ namespace Infrastructuur.EnumsAndStaticProps
         public static string SuperAdmin { get; set; } = nameof(SuperAdmin);
         public static string Admin { get; set; } = nameof(Admin);
         public static string User { get; set; } = nameof(User);
+        public static string Vip { get; set; } = nameof(Vip);
     }
 }

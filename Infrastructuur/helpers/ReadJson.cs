@@ -24,6 +24,21 @@ namespace Infrastructuur.helpers
             return null;
 
         }
+
+        public static ConnectionStringEntity ConnectionString()
+        {
+            string file = @"C:/Users/louag/Desktop/storyContactCredentials/MongoConnectionString.json";
+            // Read the JSON file
+            if (File.Exists(file))
+            {
+                string jsonString = System.IO.File.ReadAllText(file);
+                // Deserialize the JSON into an object
+                var data = JsonConvert.DeserializeObject<ConnectionStringEntity>(jsonString);
+                return data;
+            }
+            return null;
+
+        }
     }
 
 }

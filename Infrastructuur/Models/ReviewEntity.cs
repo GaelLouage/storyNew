@@ -10,7 +10,7 @@ namespace Infrastructuur.Models
     public class ReviewEntity
     {
 
-        [JsonProperty(propertyName: "reviewId")]
+        [JsonProperty(propertyName: "_id")]
         public string ReviewId { get; set; }
         [JsonProperty("reviewTitle")]
         public string ReviewTitle { get; set; }

@@ -5,8 +5,12 @@ using Infrastructuur.singleton;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
+using System.Diagnostics;
 using System.Security.Claims;
 using System.Speech.Synthesis;
+using System.Text;
 
 namespace StoryShop.Controllers
 {
@@ -81,6 +85,7 @@ namespace StoryShop.Controllers
         {
             var stories = await _storyZonService.GetStoryzonsAsync();
             ViewData["stoyList"] = stories;
+            ViewData["reviews"] = (await _reviewService.GetReviews());
             switch (amountToShow)
             {
                 case 6:
@@ -113,12 +118,23 @@ namespace StoryShop.Controllers
             if (!User.Identity.IsAuthenticated) return RedirectToAction("Login" , "User");
             detailId = id;
             var reviews = await _reviewService.GetReviewsByStoryId(id);
+            var usersRev = await _userService.GetUsersAsync(); 
             if (reviews is not null)
             {
                 ViewData["reviews"] = reviews;
-                ViewData["users"] = await _userService.GetUsersAsync();
+                ViewData["usersRevs"] = usersRev;
+             
             }
-          
+            //var userSs = new UserEntity();
+
+            //foreach (var item in reviews)
+            //{
+            //    if (item.StoryId == id)
+            //    {
+            //        userSs = usersRev.FirstOrDefault(x => x.Id == item.UserId);
+            //    }
+            //}
+
             return View(await _storyZonService.GetStoryzonByIdAsync(id));
         }
         [Authorize(Roles = "Admin,SuperAdmin")]
@@ -271,6 +287,47 @@ namespace StoryShop.Controllers
             {
                 _synthesizer.Pause();
             }
+        }
+
+        public IActionResult CreatePdf(StoryzonEntity storyzonEntity)
+        {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+            PdfDocument pdf = new PdfDocument();
+            pdf.Info.Title = storyzonEntity.Title;
+
+            PdfPage page = pdf.AddPage();
+            XGraphics graph = XGraphics.FromPdfPage(page);
+
+            XImage image = XImage.FromFile(@"C:\Users\louag\Desktop\storyzon\Story\StoryShop\wwwroot\" + storyzonEntity.Image);
+
+            // Draw the image at the top of the page
+            graph.DrawImage(image, 0, 0, page.Width, page.Height / 2);
+
+            XFont font = new XFont("Verdana", 8, XFontStyle.Regular);
+            XFont titleFont = new XFont("Verdana", 25, XFontStyle.Bold);
+
+            var text =  storyzonEntity.BodyEn.Split('.');
+            graph.DrawString(storyzonEntity.Title, font, XBrushes.Black, new XRect(0, 480, page.Width.Point, titleFont.Size), XStringFormat.Center);
+
+            // Draw each line of text
+            string text2 = "";
+            int counter = 0;
+            for (int i = 0; i < text.Length; i++)
+            {
+                graph.DrawString(text[i], font, XBrushes.Black, new XRect(0, 500+counter, page.Width.Point, font.Size), XStringFormat.Center);
+                counter += 5;
+
+            }
+            // Calculate the vertical position for the line of text
+            //double y = page.Height - (text.Length - i) * font.Size;
+            // Draw the text
+            //graph.DrawString(string.Concat(text), font, XBrushes.Black, new XRect(0, 500, page.Width.Point, font.Size), XStringFormat.Center);
+            string fileName = $"{storyzonEntity.Title}.pdf";
+            pdf.Save(fileName);
+            //Process.Start(fileName);
+            FileStream stream = new FileStream(fileName, FileMode.Open);
+            return File(stream, "application/octet-stream", fileName);
         }
     }
 }
