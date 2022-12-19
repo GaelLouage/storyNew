@@ -532,3 +532,6 @@ C:\Users\louag\Desktop\storyzon\Story\StoryShop\bin\Debug\net6.0\Microsoft.Exten
 C:\Users\louag\Desktop\storyzon\Story\StoryShop\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\louag\Desktop\storyzon\Story\StoryShop\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
 C:\Users\louag\Desktop\storyzon\Story\StoryShop\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\louag\Desktop\storyzon\Story\StoryShop\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\louag\Desktop\storyzon\Story\StoryShop\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\louag\Desktop\storyzon\Story\StoryShop\obj\Debug\net6.0\StoryShop.MvcApplicationPartsAssemblyInfo.cs

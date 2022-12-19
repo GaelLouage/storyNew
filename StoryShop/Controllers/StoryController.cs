@@ -1,9 +1,11 @@
 ﻿using Infrastructuur.extensions;
 using Infrastructuur.Models;
 using Infrastructuur.Services.Interfaces;
+using Infrastructuur.singleton;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace StoryShop.Controllers
 {
@@ -11,26 +13,41 @@ namespace StoryShop.Controllers
     {
         private readonly IStoryZonService _storyZonService;
         private readonly IFileService _fileService;
-
-        public StoryController(IStoryZonService storyZonService, IFileService fileService)
+        private readonly IUserService _userService;
+        private readonly UserSingleton _userSingleton;
+        private readonly IReviewService _reviewService;
+        private static string? detailId;
+        public StoryController(IStoryZonService storyZonService, IFileService fileService, IUserService userService, UserSingleton userSingleton, IReviewService reviewService)
         {
             _storyZonService = storyZonService;
             _fileService = fileService;
+            _userService = userService;
+            _userSingleton = userSingleton;
+            _reviewService = reviewService;
         }
 
         // GET: StoryController
         public async Task<ActionResult> Index()
         {
             var stories = await _storyZonService.GetStoryzonsAsync();
-
+            _userSingleton.User = (await _userService.GetUsersAsync()).FirstOrDefault(x => x.Email == HttpContext?.User?.FindFirst(ClaimTypes.Email)?.Value);
+  
             ViewData["topStories"] = stories;
             return View(stories);
         }
         //admin list
         [Authorize(Roles = "Admin,SuperAdmin")]
-        public async Task<IActionResult> AdminList(string filtering)
+        public async Task<IActionResult> AdminList(string filtering,string searchInput)
         {
             var stories = (await _storyZonService.GetStoryzonsAsync()).ToList();
+    
+            if (!string.IsNullOrEmpty(searchInput))
+            {
+                stories = stories.Where(x => x.Title.ToLower().Contains(searchInput.ToLower())
+                || x.Genre.ToLower().Contains(searchInput.ToLower())
+                || x.Rating.ToString().Contains(searchInput.ToLower())
+                || x.AddedDate.ToLower().Contains(searchInput.ToLower())).ToList();
+            }
             switch (filtering)
             {
                 case "Title":
@@ -42,11 +59,11 @@ namespace StoryShop.Controllers
                 case "Rating":
                     stories = stories.OrderBy(x => x.Rating).ToList();
                     break;
-                case "AddedDate":
+                case "AddedDate ascending":
                     stories = stories.OrderBy(x => x.AddedDate).ToList();
                     break;
-                default:
-                    stories = (await _storyZonService.GetStoryzonsAsync()).ToList();
+                case "AddedDate descending":
+                    stories = stories.OrderByDescending(x => x.AddedDate).ToList();
                     break;
             }
             return View(stories);
@@ -84,6 +101,15 @@ namespace StoryShop.Controllers
         // GET: StoryController/Details/5
         public async Task<ActionResult> Details(string id)
         {
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Login" , "User");
+            detailId = id;
+            var reviews = await _reviewService.GetReviewsByStoryId(id);
+            if (reviews is not null)
+            {
+                ViewData["reviews"] = reviews;
+                ViewData["users"] = await _userService.GetUsersAsync();
+            }
+          
             return View(await _storyZonService.GetStoryzonByIdAsync(id));
         }
         [Authorize(Roles = "Admin,SuperAdmin")]
@@ -182,6 +208,21 @@ namespace StoryShop.Controllers
                 return RedirectToAction(nameof(AdminList));
             }
             return RedirectToAction(nameof(AdminList));
+        }
+
+        //add review
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Review(string reviewTitle, string message, string rating)
+        {
+            var review = new ReviewEntity();
+            review.ReviewTitle = reviewTitle;
+            review.ReviewBody = message;
+            review.Rating = rating;
+            review.StoryId = detailId;
+            review.UserId = _userSingleton.User.Id;
+            var reviewToAdd = await _reviewService.AddReview(review);
+            return RedirectToAction(nameof(Details), new { id = detailId });
         }
     }
 }

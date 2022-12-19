@@ -1,11 +1,14 @@
-﻿@model Infrastructuur.Models.StoryzonEntity
+﻿@using Infrastructuur.Models
+@model Infrastructuur.Models.StoryzonEntity
 
 @{
     ViewData["Title"] = "Details";
-      var storyDelete = ViewData["storyDeleted"] as string;
+    var storyDelete = ViewData["storyDeleted"] as string;
+    var reviews = ViewData["reviews"] as List<ReviewEntity>;
+    var users = ViewData["users"] as List<UserEntity>;
 }
 <div class="contact-us pt-5">
-      @if (!string.IsNullOrEmpty(storyDelete))
+    @if (!string.IsNullOrEmpty(storyDelete))
     {
         <div class="container mt-5">
             <div id="alert" class="alert alert-success alert-dismissible" role="alert">
@@ -39,7 +42,39 @@
             <div class="col-lg-6">
                 <div class="section-heading">
                     <h2>Reviews</h2>
-                    <span>@Model.Title Reviews</span>
+                    <span class="mb-3">@Model.Title Reviews</span>
+                    @if (reviews is not null)
+                    {
+                        @foreach (var review in reviews)
+                        {
+
+                            <h3 class="mt-5">@review.ReviewTitle</h3>
+                            <div class="d-flex">
+                            <div class="col-lg-6">
+                                <h5 class="mt-2">@users.FirstOrDefault(x => x.Id == review.UserId).UserName</h5>
+                            </div>
+                            <div class="col-lg-6 align-baseline">
+                                <ul class="stars d-flex mt-2">
+                                    @for (int i = 0; i < 5; i++)
+                                    {
+                                        if (int.Parse(review.Rating) > i)
+                                        {
+                                            <li><i class="fa fa-star" style="color:orange;"></i></li>
+                                        }
+                                        else
+                                        {
+                                            <li><i class="fa fa-star checked"></i></li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                            </div>
+                            <p>@review.ReviewBody</p>
+
+                            <hr />
+                        }
+                    }
+
                 </div>
             </div>
             <div class="col-lg-6">
@@ -47,16 +82,16 @@
                     <h2>Write a review</h2>
                     <span>Your feedback is greatly appreciated and will help us improve in the future.</span>
                 </div>
-                <form id="contact" method="post">
+                <form asp-action="Review" id="contact" method="post">
                     <div class="row">
                         <div class="col-lg-6">
                             <fieldset>
-                                <input name="name" type="text" id="name" placeholder="Your name" required="">
+                                <input name="reviewTitle" type="text" id="name" placeholder="Your review Title" required="">
                             </fieldset>
                         </div>
                         <div class="col-lg-6">
                             <fieldset>
-                                <input name="email" type="text" id="email" placeholder="Your email" required="">
+                                <input name="rating" type="text" id="name" placeholder="Your rating" required="">
                             </fieldset>
                         </div>
                         <div class="col-lg-12">

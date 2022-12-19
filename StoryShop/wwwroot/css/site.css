@@ -33,6 +33,23 @@ body {
         padding-left: 2em;
     }
 
+.input-filtering {
+    position: relative;
+    display: flex !important;
+    grid-template-columns: repeat(3,1fr) !important;
+    left: 34em;
+    top: -1.7em;
+}
+
+.input-filtering select {
+    max-width: 10em;
+}
+.input-filtering input {
+}
+
+.input-filtering button {
+}
+
 @media (max-width: 575px) {
     .mobile-w-50 {
         width: 50% !important;
@@ -46,16 +63,32 @@ body {
     .baar {
         display: none;
     }
+
+    .input-filtering {
+        left: 3em;
+        top: 2.8em;
+        margin:10px auto;
+    }
+
+}
+
+@media (max-width: 1200px) {
+
+    .input-filtering {
+        left: -0.5em;
+        top: -0.4em;
+        margin: 10px 0;
+    }
+
 }
 
 .filter-form {
     display: flex;
- 
 }
 
-.filter-form select{
-   height: 3em;
-}
+    .filter-form select {
+        height: 3em;
+    }
 
 .login-container {
     margin-top: 180em !important;

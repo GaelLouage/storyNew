@@ -3,6 +3,7 @@ using Infrastructuur.extensions;
 using Infrastructuur.helpers;
 using Infrastructuur.Models;
 using Infrastructuur.Services.Interfaces;
+using Infrastructuur.singleton;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -21,11 +22,12 @@ namespace StoryShop.Controllers
     {
         private readonly IUserService _userService;
         private readonly ILogger<UserController> _logger;
-
-        public UserController(IUserService userService, ILogger<UserController> logger)
+        private readonly UserSingleton _userSingleton;
+        public UserController(IUserService userService, ILogger<UserController> logger, UserSingleton userSingleton)
         {
             _userService = userService;
             _logger = logger;
+            _userSingleton = userSingleton;
         }
 
         // GET: UserController
@@ -36,9 +38,18 @@ namespace StoryShop.Controllers
         }
         // GET: UserController
         [Authorize(Roles = "Admin,SuperAdmin")]
-        public async Task<IActionResult> UserManagement(string filtering)
+        public async Task<IActionResult> UserManagement(string filtering, string searchInput)
         {
+            ViewData["User"] = _userSingleton.User;
             var users = (await _userService.GetUsersAsync()).ToList();
+            if (!string.IsNullOrEmpty(searchInput))
+            {
+                users = users.Where(x => x.FirstName.ToLower().Contains(searchInput.ToLower())
+                || x.LastName.ToLower().Contains(searchInput.ToLower()) 
+                || x.UserName.ToLower().Contains(searchInput.ToLower())
+                || x.Email.ToLower().Contains(searchInput.ToLower())).ToList();
+            }
+           
             switch (filtering)
             {
                 case "UserName":
@@ -56,9 +67,6 @@ namespace StoryShop.Controllers
                 case "Role":
                     users = users.OrderBy(x => x.Role).ToList();
                     break;
-                default:
-                    users = (await _userService.GetUsersAsync()).ToList();
-                    break;
             }
           
             return View(users);
@@ -66,9 +74,13 @@ namespace StoryShop.Controllers
         // GET: UserController/Details/5
         public async Task<ActionResult> Details(string id)
         {
+            ViewData["User"] = _userSingleton.User;
             return View(await _userService.GetUserByIdAsync(id));
         }
-
+        public async Task<ActionResult> DetailsUser(string userName)
+        {
+            return RedirectToAction(nameof(Details), new { id = _userSingleton.User.Id });
+        }
         // GET: UserController/Create
         [Authorize(Roles = "Admin,SuperAdmin")]
         public ActionResult Create()
@@ -84,6 +96,7 @@ namespace StoryShop.Controllers
         {
             try
             {
+                user.Password = user.Password.HashToPassword();
                 await _userService.AddUserAsync(user);
                 return RedirectToAction(nameof(UserManagement));
             }
@@ -94,14 +107,14 @@ namespace StoryShop.Controllers
         }
 
         // GET: UserController/Edit/5
-        [Authorize(Roles = "Admin,SuperAdmin")]
+        [Authorize(Roles = "Admin,SuperAdmin,User")]
         public async Task<ActionResult> Edit(string id)
         {
             return View(await _userService.GetUserByIdAsync(id));
         }
 
         // POST: UserController/Edit/5
-        [Authorize(Roles = "Admin,SuperAdmin")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(string id, UserEntity user)
@@ -110,7 +123,13 @@ namespace StoryShop.Controllers
             {
                 user.Password = user.Password.HashToPassword();
                 await _userService.UpdateUserByIdAsync(id, user);
-                return RedirectToAction(nameof(UserManagement));
+                var userRole = _userSingleton.User;
+
+                if (userRole is not null && (userRole.Role == Role.Admin || userRole.Role == Role.SuperAdmin))
+                {
+                    return RedirectToAction(nameof(UserManagement));
+                }
+                return RedirectToAction(nameof(Index), "Story");
             }
             catch
             {

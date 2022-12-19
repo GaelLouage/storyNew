@@ -1,6 +1,7 @@
 using Infrastructuur.Database;
 using Infrastructuur.Services.Classes;
 using Infrastructuur.Services.Interfaces;
+using Infrastructuur.singleton;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,10 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+/*user singleton*/
+builder.Services.AddSingleton<UserSingleton>();
 builder.Services.AddSingleton(new StoryZonDbContext());
 builder.Services.AddScoped<IStoryZonService, StoryzonService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => { options.LoginPath = "/login"; });
 var app = builder.Build();

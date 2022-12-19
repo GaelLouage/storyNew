@@ -25,6 +25,8 @@ namespace Infrastructuur.Models
 
         [JsonProperty("storyId")]
         public string StoryId { get; set; }
+        [JsonProperty("rating")]
+        public string Rating { get; set; }
 
         [JsonProperty("addedDate")]
         public string AddedDate { get; set; } = DateTime.Now.ToString("MM/dd//yy");
