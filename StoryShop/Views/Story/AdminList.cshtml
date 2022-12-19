@@ -1,9 +1,21 @@
-﻿@model IEnumerable<Infrastructuur.Models.StoryzonEntity>
+﻿@using Infrastructuur.Models
+@model IEnumerable<Infrastructuur.Models.StoryzonEntity>
 
 @{
     ViewData["Title"] = "AdminList";
- 
+
     int tableCounter = 1;
+    var reviews = ViewData["reviews"] as List<ReviewEntity>;
+    double GetAverage(string storyId)
+    {
+        if (reviews is null) return 0;
+        var rating = @reviews.Where(x => x.StoryId == storyId).Sum(x => int.Parse(x.Rating));
+        if (rating != 0)
+        {
+            return rating / @reviews.Where(x => x.StoryId == storyId).Count();
+        }
+        return 0;
+    }
 }
 
 
@@ -18,7 +30,7 @@
                     <div class="col-xs-7 d-flex top-buttons-container">
 
                         @*serachbar here and drowpdownlist with filter*@
-                     <form class="filter-form input-filtering" asp-action="AdminList">
+                        <form class="filter-form input-filtering" asp-action="AdminList">
                             <div class="col-lg-6">
                                 <fieldset>
                                     <select name="filtering" class="form-control">
@@ -27,12 +39,12 @@
                                         <option value="Genre">Genre</option>
                                         <option value="Rating">Rating</option>
                                         <option value="AddedDate ascending">AddedDate ascending</option>
-                                         <option value="AddedDate descending">AddedDate descending</option>
+                                        <option value="AddedDate descending">AddedDate descending</option>
                                     </select>
 
                                 </fieldset>
                             </div>
-                              <div class="col-lg-6 ">
+                            <div class="col-lg-6 ">
                                 <fieldset>
                                     <input type="text" name="searchInput" id="searchInput" />
                                 </fieldset>
@@ -48,7 +60,7 @@
                 <form asp-action="WriteToExcel" class="excell-button" method="post">
                     <button type="submit" class="btn bg-dark text-white w-25"><i class="material-icons">&#xE24D;</i> <span>Export to Excel</span></button>
                 </form>
-                   
+
             </div>
 
             <table class="table table-striped table-hover">
@@ -69,14 +81,8 @@
                             <td>@tableCounter</td>
                             <td><img src="~/@story.Image" class="avatar" style="width:3em" alt="@story.Title">  @story.Title</td>
                             <td>@story.Genre</td>
-                            @if (string.IsNullOrEmpty(@story.Rating.ToString()))
-                            {
-                                <td>0</td>
-                            }
-                            else
-                            {
-                                <td>@story.Rating</td>
-                            }
+
+                            <td>@GetAverage(story.Id)</td>
                             <td>@story.AddedDate</td>
                             <td>
                                 <a asp-action="Edit" asp-route-id="@story.Id" class="settings text-black" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE8B8;</i></a>

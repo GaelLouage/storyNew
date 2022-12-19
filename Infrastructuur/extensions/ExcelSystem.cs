@@ -53,7 +53,6 @@ namespace Infrastructuur.extensions
                     }
                 }
 
-                // Save the workbook to a file
                 using (var fileStream = File.Create(fileName))
                 {
                     workbook.Write(fileStream);

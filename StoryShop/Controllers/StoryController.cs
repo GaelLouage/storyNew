@@ -52,7 +52,7 @@ namespace StoryShop.Controllers
         public async Task<IActionResult> AdminList(string filtering,string searchInput)
         {
             var stories = (await _storyZonService.GetStoryzonsAsync()).ToList();
-    
+            ViewData["reviews"] = (await _reviewService.GetReviews());
             if (!string.IsNullOrEmpty(searchInput))
             {
                 stories = stories.Where(x => x.Title.ToLower().Contains(searchInput.ToLower())
@@ -316,7 +316,7 @@ namespace StoryShop.Controllers
             for (int i = 0; i < text.Length; i++)
             {
                 graph.DrawString(text[i], font, XBrushes.Black, new XRect(0, 500+counter, page.Width.Point, font.Size), XStringFormat.Center);
-                counter += 5;
+                counter += 10;
 
             }
             // Calculate the vertical position for the line of text
