@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-/*user singleton*/
+
 builder.Services.AddSingleton<UserSingleton>();
 builder.Services.AddSingleton<SpeechSynthesizer>(SynthesizerSingleton.Instance);
 builder.Services.AddSingleton(new StoryZonDbContext());

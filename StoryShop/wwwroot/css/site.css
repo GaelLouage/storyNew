@@ -46,11 +46,7 @@ body {
 .input-filtering select {
     max-width: 10em;
 }
-.input-filtering input {
-}
 
-.input-filtering button {
-}
 
 @media (max-width: 575px) {
     .mobile-w-50 {
@@ -71,7 +67,12 @@ body {
         top: 2.8em;
         margin:10px auto;
     }
-
+    .playButton {
+        position: absolute;
+        top: 9em;
+        left: 13em;
+    }
+  
 }
 
 @media (max-width: 1200px) {

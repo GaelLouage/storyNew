@@ -235,33 +235,33 @@ namespace StoryShop.Controllers
         }
         public IActionResult TextToSpeach(string textToRead)
         {
-            isPlay = !isPlay;
-            if (isPlay)
-            {
                 SynthesizeState(textToRead);
-            }
-            else
-            {
+
                 if (_synthesizer.State == SynthesizerState.Paused)
                 {
                     _synthesizer.Resume();
                 }
-            }
-            
             return RedirectToAction(nameof(Details), new { id = detailId });
         }
 
         private void SynthesizeState(string? textToRead = null)
         {
             // Cancel the speech synthesis
-       
             if (_synthesizer.State != SynthesizerState.Speaking && _synthesizer.State != SynthesizerState.Paused)
             {
                 try
                 {
-                    _synthesizer.SelectVoiceByHints(VoiceGender.Female);
-                    _synthesizer.Rate = 1;
-                    _synthesizer.Speak(textToRead);
+                    isPlay = !isPlay;
+                    if((bool)isPlay)
+                    {
+                        _synthesizer.SelectVoiceByHints(VoiceGender.Female);
+                        _synthesizer.Rate = 1;
+                        _synthesizer.Speak(textToRead);
+                    } else
+                    {
+                        _synthesizer.Pause();
+                    }
+                   
                 } catch
                 {
 

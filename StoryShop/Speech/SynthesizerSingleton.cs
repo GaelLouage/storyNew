@@ -23,5 +23,7 @@ namespace StoryShop.Speech
                 return _speechSynthesizer;
             }
         }
+
+     
     }
 }

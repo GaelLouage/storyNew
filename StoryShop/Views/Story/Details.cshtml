@@ -9,7 +9,7 @@
     var users = ViewData["users"] as List<UserEntity>;
     int starValue = 0;
     var stateSoundButton = ViewData["buttonChangeClass"] as string;
-    var isPlaying = StoryController.isPlay;
+
 }
 <div class="contact-us pt-5">
     @if (!string.IsNullOrEmpty(storyDelete))
@@ -36,14 +36,9 @@
                 <img class="w-100 mt-2" src="~/@Model.Image" />
                 <form asp-action="TextToSpeach">
                     <input name="textToRead" value="@Model.BodyEn" hidden />
-                    @if(!isPlaying)
-                    {
-                            <button class="rounded-pill  mt-5" type="submit"><i class="fa fa-play"></i></button>
-                    } else
-                    {
-                            <button class="rounded-pill  mt-5" type="submit"><i class="fa fa-pause"></i></button>
-                    }
-                
+
+                     <button class="rounded-pill  mt-5 playButton" type="submit"><i class="fa fa-volume-up"></i></button>
+
                 </form>
             </div>
         </div>
