@@ -83,7 +83,7 @@ namespace StoryShop.Controllers
         public async Task<ActionResult> Details(string id)
         {
             ViewData["User"] = _userSingleton.User;
-            var storiesSelected = (await _userSelectedStoryService.GetStoryzonsByUserSelectedIdAsync(_userSingleton.User.Id)).ToList();
+            var storiesSelected = (await _userSelectedStoryService.GetStoryzonsByUserSelectedIdAsync(id)).ToList();
             ViewData["storiesSelectedByUser"] = storiesSelected;
 
             return View(await _userService.GetUserByIdAsync(id));
@@ -305,36 +305,13 @@ namespace StoryShop.Controllers
             {
                 {"UserName","UserName" },
                 {"FirstName","FirstName" },
-                {"LastName","Email" },
+                {"Email","Email" },
                 {"Role","Role" }
             });
             Response.Headers.Add("Content-Disposition", "attachment; filename=data.xls");
 
-     
 
             return File(file.ToArray(), "application/octet-stream");
         }
-
-        //public async Task<IActionResult> PasswordReseter(string email)
-        //{
-        //    var userByEmail = (await _userService.GetUsersAsync())
-        //        .FirstOrDefault(x => x.Email == email);
-    
-        //    var credentials = ReadJson.GetEmailCredentials(@"C:/Users/louag/Desktop/storyContactCredentials/credentials.json");
-        
-        //    MailMessage message = new MailMessage();
-        //    message.From = new MailAddress(credentials.EmailAddress);
-        //    message.To.Add(email);
-        //    message.Subject = "password";
-        //    message.Body = userByEmail.Password;
-
-        //    // Set the server details
-        //    SmtpClient smtpClient = new SmtpClient();
-        //    smtpClient.Host = "smtp.office365.com";
-        //    smtpClient.Port = 587;
-        //    smtpClient.EnableSsl = true;
-        //    smtpClient.Credentials = new NetworkCredential(credentials.EmailAddress, credentials.PassWord);
-        //    return RedirectToAction(nameof(Login));
-        //}
     }
 }

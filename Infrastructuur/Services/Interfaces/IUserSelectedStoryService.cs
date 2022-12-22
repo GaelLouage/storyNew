@@ -11,5 +11,7 @@ namespace Infrastructuur.Services.Interfaces
     {
         Task<IQueryable<StoryzonEntity>> GetStoryzonsByUserSelectedIdAsync(string userId);
         Task<bool> AddSelectedStoryToUserByIdAsync(UserStorySelectEntity addy);
+
+        Task<IQueryable<UserEntity>> GetUsersThatWatchedStoryByIdAsync(string userId);
     }
 }

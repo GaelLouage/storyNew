@@ -50,5 +50,24 @@ namespace Infrastructuur.Services.Classes
             }
             return newStories.AsQueryable();
         }
+
+        public async Task<IQueryable<UserEntity>> GetUsersThatWatchedStoryByIdAsync(string storyId)
+        {
+            var allUsers = await _storyZonDbContext.GetAllAsync<UserEntity>("user");
+            var selectedStoryByUserIds = (await _storyZonDbContext.GetAllAsync<UserStorySelectEntity>("userStorySelected"))
+                 .Where(x => x.StoryId == storyId).Select(x => x.UserId).ToList();
+            var newUsers = new List<UserEntity>();
+            foreach (var userId in selectedStoryByUserIds)
+            {
+                foreach (var user in allUsers)
+                {
+                    if (user.Id == userId)
+                    {
+                        newUsers.Add(user);
+                    }
+                }
+            }
+            return newUsers.AsQueryable();
+        }
     }
 }

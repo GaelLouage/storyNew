@@ -46,7 +46,11 @@ body {
 .input-filtering select {
     max-width: 10em;
 }
-
+.views {
+    background-color: #2A2A2A;
+    color: white;
+    text-align: center;
+}
 
 @media (max-width: 575px) {
     .mobile-w-50 {

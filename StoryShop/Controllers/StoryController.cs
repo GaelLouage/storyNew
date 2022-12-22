@@ -21,14 +21,13 @@ namespace StoryShop.Controllers
         private readonly IFileService _fileService;
         private readonly IUserService _userService;
         private readonly IReviewService _reviewService;
-        private readonly IUserSelectedStoryService _userSelectedStory;
         private readonly IUserSelectedStoryService _userSelectedStoryService;
         private readonly SpeechSynthesizer _synthesizer;
         private readonly UserSingleton _userSingleton;
         private static string? detailId;
         public static bool isPlay = false;
 
-        public StoryController(IStoryZonService storyZonService, IFileService fileService, IUserService userService, UserSingleton userSingleton, IReviewService reviewService, SpeechSynthesizer synthesizer, IUserSelectedStoryService userSelectedStory, IUserSelectedStoryService userSelectedStoryService)
+        public StoryController(IStoryZonService storyZonService, IFileService fileService, IUserService userService, UserSingleton userSingleton, IReviewService reviewService, SpeechSynthesizer synthesizer, IUserSelectedStoryService userSelectedStoryService)
         {
             _storyZonService = storyZonService;
             _fileService = fileService;
@@ -36,7 +35,6 @@ namespace StoryShop.Controllers
             _userSingleton = userSingleton;
             _reviewService = reviewService;
             _synthesizer = synthesizer;
-            _userSelectedStory = userSelectedStory;
             _userSelectedStoryService = userSelectedStoryService;
             _synthesizer.SpeakAsyncCancelAll();
         }
@@ -138,16 +136,16 @@ namespace StoryShop.Controllers
                 ViewData["usersRevs"] = usersRev;
 
             }
-            if(!await _userSelectedStory.AddSelectedStoryToUserByIdAsync(new UserStorySelectEntity
+            if(!await _userSelectedStoryService.AddSelectedStoryToUserByIdAsync(new UserStorySelectEntity
             {
                 StoryId = id,
                 UserId = _userSingleton.User.Id
             }))
             {
-
                 //get error message for admin
-            } 
-
+            }
+            var usersThatWatched = (await _userSelectedStoryService.GetUsersThatWatchedStoryByIdAsync(id)).ToList();
+            ViewData["usersThatWatched"] = usersThatWatched;
             return View(await _storyZonService.GetStoryzonByIdAsync(id));
         }
         [Authorize(Roles = "Admin,SuperAdmin")]
@@ -234,7 +232,8 @@ namespace StoryShop.Controllers
         [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<IActionResult> WriteToExcel()
         {
-            var file = (await _storyZonService.GetStoryzonsAsync()).ToList().WriteDataToExcel<StoryzonEntity>("StoryData.xls", new Dictionary<string, string>
+            var file = (await _storyZonService.GetStoryzonsAsync()).ToList()
+                .WriteDataToExcel<StoryzonEntity>("StoryData.xls", new Dictionary<string, string>
             {
                 {"Title","Title" },
                 {"Genre","Genre" },
