@@ -20,7 +20,7 @@ namespace StoryShop.Controllers
         private readonly IFileService _fileService;
         private readonly IUserService _userService;
         private readonly IReviewService _reviewService;
-        private readonly  SpeechSynthesizer _synthesizer;
+        private readonly SpeechSynthesizer _synthesizer;
         private readonly UserSingleton _userSingleton;
         private static string? detailId;
         public static bool isPlay = false;
@@ -33,15 +33,15 @@ namespace StoryShop.Controllers
             _userSingleton = userSingleton;
             _reviewService = reviewService;
             _synthesizer = synthesizer;
-             _synthesizer.SpeakAsyncCancelAll();
+            _synthesizer.SpeakAsyncCancelAll();
 
         }
 
         // GET: StoryController
         public async Task<ActionResult> Index()
         {
-            
-             var stories = await _storyZonService.GetStoryzonsAsync();
+
+            var stories = await _storyZonService.GetStoryzonsAsync();
             _userSingleton.User = (await _userService.GetUsersAsync()).FirstOrDefault(x => x.Email == HttpContext?.User?.FindFirst(ClaimTypes.Email)?.Value);
             ViewData["reviews"] = (await _reviewService.GetReviews());
             ViewData["topStories"] = stories;
@@ -49,7 +49,7 @@ namespace StoryShop.Controllers
         }
         //admin list
         [Authorize(Roles = "Admin,SuperAdmin")]
-        public async Task<IActionResult> AdminList(string filtering,string searchInput)
+        public async Task<IActionResult> AdminList(string filtering, string searchInput)
         {
             var stories = (await _storyZonService.GetStoryzonsAsync()).ToList();
             ViewData["reviews"] = (await _reviewService.GetReviews());
@@ -115,15 +115,15 @@ namespace StoryShop.Controllers
         public async Task<ActionResult> Details(string id)
         {
 
-            if (!User.Identity.IsAuthenticated) return RedirectToAction("Login" , "User");
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Login", "User");
             detailId = id;
             var reviews = await _reviewService.GetReviewsByStoryId(id);
-            var usersRev = await _userService.GetUsersAsync(); 
+            var usersRev = await _userService.GetUsersAsync();
             if (reviews is not null)
             {
                 ViewData["reviews"] = reviews;
                 ViewData["usersRevs"] = usersRev;
-             
+
             }
             //var userSs = new UserEntity();
 
@@ -251,12 +251,12 @@ namespace StoryShop.Controllers
         }
         public IActionResult TextToSpeach(string textToRead)
         {
-                SynthesizeState(textToRead);
+            SynthesizeState(textToRead);
 
-                if (_synthesizer.State == SynthesizerState.Paused)
-                {
-                    _synthesizer.Resume();
-                }
+            if (_synthesizer.State == SynthesizerState.Paused)
+            {
+                _synthesizer.Resume();
+            }
             return RedirectToAction(nameof(Details), new { id = detailId });
         }
 
@@ -268,17 +268,19 @@ namespace StoryShop.Controllers
                 try
                 {
                     isPlay = !isPlay;
-                    if((bool)isPlay)
+                    if ((bool)isPlay)
                     {
                         _synthesizer.SelectVoiceByHints(VoiceGender.Female);
                         _synthesizer.Rate = 1;
                         _synthesizer.Speak(textToRead);
-                    } else
+                    }
+                    else
                     {
                         _synthesizer.Pause();
                     }
-                   
-                } catch
+
+                }
+                catch
                 {
 
                 }
@@ -291,6 +293,7 @@ namespace StoryShop.Controllers
 
         public IActionResult CreatePdf(StoryzonEntity storyzonEntity)
         {
+
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             PdfDocument pdf = new PdfDocument();
@@ -299,35 +302,62 @@ namespace StoryShop.Controllers
             PdfPage page = pdf.AddPage();
             XGraphics graph = XGraphics.FromPdfPage(page);
 
-            XImage image = XImage.FromFile(@"C:\Users\louag\Desktop\storyzon\Story\StoryShop\wwwroot\" + storyzonEntity.Image);
+
+            string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\" + storyzonEntity.Image);
+            XImage image = XImage.FromFile(imagePath);
 
             // Draw the image at the top of the page
             graph.DrawImage(image, 0, 0, page.Width, page.Height / 2);
 
-            XFont font = new XFont("Verdana", 8, XFontStyle.Regular);
-            XFont titleFont = new XFont("Verdana", 25, XFontStyle.Bold);
+            XFont font = new XFont("Verdana", 10, XFontStyle.Regular);
+            XFont titleFont = new XFont("Verdana", 30, XFontStyle.Bold);
 
-            var text =  storyzonEntity.BodyEn.Split('.');
-            graph.DrawString(storyzonEntity.Title, font, XBrushes.Black, new XRect(0, 480, page.Width.Point, titleFont.Size), XStringFormat.Center);
 
-            // Draw each line of text
-            string text2 = "";
-            int counter = 0;
-            for (int i = 0; i < text.Length; i++)
+            XStringFormat format = new XStringFormat();
+            format.Alignment = XStringAlignment.Center;
+            format.LineAlignment = XLineAlignment.Center;
+
+
+            graph.DrawString(storyzonEntity.Title, titleFont, XBrushes.Black, new XRect(0, 480, page.Width.Point, titleFont.Size), format);
+
+            // Split the text into words
+            string[] words = storyzonEntity.BodyEn.Split(' ');
+
+            // Set the maximum width for each line of text
+            double maxWidth = page.Width.Point / 2;
+
+            // Set the starting position for the text
+            double x = 0;
+            double y = 550;
+
+            // Keep track of the current line of text
+            string line = "";
+            foreach (string word in words)
             {
-                graph.DrawString(text[i], font, XBrushes.Black, new XRect(0, 500+counter, page.Width.Point, font.Size), XStringFormat.Center);
-                counter += 10;
-
+                // Measure the width of the current line of text
+                double width = graph.MeasureString(line, font).Width;
+                // If the width of the line exceeds the maximum width, draw the line and start a new one
+                if (width > maxWidth)
+                {
+                    graph.DrawString(line, font, XBrushes.Black, new XRect(x, y, page.Width.Point, font.Size), format);
+                    line = "";
+                    y += font.Size;
+                }
+                line += word + " ";
             }
-            // Calculate the vertical position for the line of text
-            //double y = page.Height - (text.Length - i) * font.Size;
-            // Draw the text
-            //graph.DrawString(string.Concat(text), font, XBrushes.Black, new XRect(0, 500, page.Width.Point, font.Size), XStringFormat.Center);
+          
+
+            graph.DrawString(line, font, XBrushes.Black, new XRect(x, y, page.Width.Point, font.Size), format);
+
             string fileName = $"{storyzonEntity.Title}.pdf";
-            pdf.Save(fileName);
-            //Process.Start(fileName);
-            FileStream stream = new FileStream(fileName, FileMode.Open);
-            return File(stream, "application/octet-stream", fileName);
+
+            // Save the PDF to a memory stream
+            MemoryStream stream = new MemoryStream();
+            pdf.Save(stream, false);
+
+            Response.Headers.Add("Content-Disposition", "attachment; filename=" + fileName);
+
+            return File(stream.ToArray(), "application/octet-stream");
         }
     }
 }
