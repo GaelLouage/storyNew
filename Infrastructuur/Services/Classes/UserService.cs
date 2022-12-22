@@ -63,10 +63,10 @@ namespace Infrastructuur.Services.Classes
             return (await GetUsersAsync()).FirstOrDefault(x => x.Id == id);
         }
 
-        public async Task<UserEntity> GetUserByNameAndPasswordAsync(string userName, string password)
+        public async Task<UserEntity> GetUserByNameAsync(string userName)
         {
             return (await _storyZonDbContext.GetAllAsync<UserEntity>("user"))
-                .FirstOrDefault(x => x.UserName == userName && x.Password == password);
+                .FirstOrDefault(x => x.UserName == userName);
                 
         }
 

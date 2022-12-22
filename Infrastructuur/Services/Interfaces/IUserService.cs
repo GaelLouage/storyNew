@@ -20,6 +20,6 @@ namespace Infrastructuur.Services.Interfaces
         Task<bool> RemoveStoryFromUserAsync
             (string userId, string storyzonId);
 
-        Task<UserEntity> GetUserByNameAndPasswordAsync(string userName, string password);    
+        Task<UserEntity> GetUserByNameAsync(string userName);    
     }
 }

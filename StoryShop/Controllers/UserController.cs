@@ -199,21 +199,23 @@ namespace StoryShop.Controllers
                 return RedirectToAction(nameof(Login));
             }
 
-            // Hash the password
-            user.Password = user.Password.HashToPassword();
-
+           
             // Get the user from the database
-            var userLogin = await _userService.GetUserByNameAndPasswordAsync(user.UserName, user.Password);
-
-            // Check if the user exists
-            if (userLogin is null)
+            var userLogin = await _userService.GetUserByNameAsync(user.UserName);
+            if (!HashPassword.VerifyPassword(user.Password, userLogin.Password))
+            {
+                TempData["ErrorMessage"] = "Wrong username or password.";
+                return RedirectToAction(nameof(Login));
+            }
+                // Check if the user exists
+                if (userLogin is null)
             {
                 TempData["ErrorMessage"] = "Wrong username or password.";
                 return RedirectToAction(nameof(Login));
             }
 
             // Check if the username and password match
-            if (!Equals(user,userLogin))
+            if (!Equals(user.UserName,userLogin.UserName))
             {
                 TempData["ErrorMessage"] = "Wrong username or password.";
                 return RedirectToAction(nameof(Login));

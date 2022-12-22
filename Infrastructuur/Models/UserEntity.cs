@@ -41,7 +41,7 @@ namespace Infrastructuur.Models
             else
             {
                 UserEntity user = (UserEntity)obj;
-                return (UserName == user.UserName) && (Password == user.Password);
+                return UserName == user.UserName;
             }
         }
     }
