@@ -1,4 +1,5 @@
-﻿using Infrastructuur.extensions;
+﻿using Infrastructuur.EnumsAndStaticProps;
+using Infrastructuur.extensions;
 using Infrastructuur.Models;
 using Infrastructuur.Services.Interfaces;
 using Infrastructuur.singleton;
@@ -20,12 +21,14 @@ namespace StoryShop.Controllers
         private readonly IFileService _fileService;
         private readonly IUserService _userService;
         private readonly IReviewService _reviewService;
+        private readonly IUserSelectedStoryService _userSelectedStory;
+        private readonly IUserSelectedStoryService _userSelectedStoryService;
         private readonly SpeechSynthesizer _synthesizer;
         private readonly UserSingleton _userSingleton;
         private static string? detailId;
         public static bool isPlay = false;
 
-        public StoryController(IStoryZonService storyZonService, IFileService fileService, IUserService userService, UserSingleton userSingleton, IReviewService reviewService, SpeechSynthesizer synthesizer)
+        public StoryController(IStoryZonService storyZonService, IFileService fileService, IUserService userService, UserSingleton userSingleton, IReviewService reviewService, SpeechSynthesizer synthesizer, IUserSelectedStoryService userSelectedStory, IUserSelectedStoryService userSelectedStoryService)
         {
             _storyZonService = storyZonService;
             _fileService = fileService;
@@ -33,20 +36,30 @@ namespace StoryShop.Controllers
             _userSingleton = userSingleton;
             _reviewService = reviewService;
             _synthesizer = synthesizer;
+            _userSelectedStory = userSelectedStory;
+            _userSelectedStoryService = userSelectedStoryService;
             _synthesizer.SpeakAsyncCancelAll();
-
         }
 
         // GET: StoryController
         public async Task<ActionResult> Index()
         {
-
+            var storiesForRecommended = new List<StoryzonEntity>();
+            List<StoryzonEntity> userSelectedThose = null;
             var stories = await _storyZonService.GetStoryzonsAsync();
             _userSingleton.User = (await _userService.GetUsersAsync()).FirstOrDefault(x => x.Email == HttpContext?.User?.FindFirst(ClaimTypes.Email)?.Value);
             ViewData["reviews"] = (await _reviewService.GetReviews());
             ViewData["topStories"] = stories;
+            if(_userSingleton.User is not null)
+            {
+                userSelectedThose = (await _userSelectedStoryService?.GetStoryzonsByUserSelectedIdAsync(_userSingleton.User.Id)).ToList();
+                storiesForRecommended = GetByGenreAndNotSelected(storiesForRecommended, userSelectedThose, stories);
+            }
             return View(stories);
         }
+
+    
+
         //admin list
         [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<IActionResult> AdminList(string filtering, string searchInput)
@@ -125,15 +138,15 @@ namespace StoryShop.Controllers
                 ViewData["usersRevs"] = usersRev;
 
             }
-            //var userSs = new UserEntity();
+            if(!await _userSelectedStory.AddSelectedStoryToUserByIdAsync(new UserStorySelectEntity
+            {
+                StoryId = id,
+                UserId = _userSingleton.User.Id
+            }))
+            {
 
-            //foreach (var item in reviews)
-            //{
-            //    if (item.StoryId == id)
-            //    {
-            //        userSs = usersRev.FirstOrDefault(x => x.Id == item.UserId);
-            //    }
-            //}
+                //get error message for admin
+            } 
 
             return View(await _storyZonService.GetStoryzonByIdAsync(id));
         }
@@ -221,18 +234,16 @@ namespace StoryShop.Controllers
         [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<IActionResult> WriteToExcel()
         {
-
-            if ((await _storyZonService.GetStoryzonsAsync()).ToList().WriteDataToExcel<StoryzonEntity>("StoryData.xls", new Dictionary<string, string>
+            var file = (await _storyZonService.GetStoryzonsAsync()).ToList().WriteDataToExcel<StoryzonEntity>("StoryData.xls", new Dictionary<string, string>
             {
                 {"Title","Title" },
                 {"Genre","Genre" },
                 {"Rating","Rating" },
                 {"AddedDate","AddedDate" }
-            }))
-            {
-                return RedirectToAction(nameof(AdminList));
-            }
-            return RedirectToAction(nameof(AdminList));
+            });
+            Response.Headers.Add("Content-Disposition", "attachment; filename=data.xls");
+
+            return File(file.ToArray(), "application/octet-stream");
         }
 
         //add review
@@ -318,17 +329,17 @@ namespace StoryShop.Controllers
             format.LineAlignment = XLineAlignment.Center;
 
 
-            graph.DrawString(storyzonEntity.Title, titleFont, XBrushes.Black, new XRect(0, 480, page.Width.Point, titleFont.Size), format);
+            graph.DrawString(storyzonEntity.Title, titleFont, XBrushes.White, new XRect(0, 120, page.Width.Point, titleFont.Size), format);
 
             // Split the text into words
             string[] words = storyzonEntity.BodyEn.Split(' ');
 
             // Set the maximum width for each line of text
-            double maxWidth = page.Width.Point / 2;
+            double maxWidth = page.Width.Point / 1.5;
 
             // Set the starting position for the text
             double x = 0;
-            double y = 550;
+            double y = 500;
 
             // Keep track of the current line of text
             string line = "";
@@ -358,6 +369,24 @@ namespace StoryShop.Controllers
             Response.Headers.Add("Content-Disposition", "attachment; filename=" + fileName);
 
             return File(stream.ToArray(), "application/octet-stream");
+        }
+
+
+        /*get stories by max selected genre and not selected*/
+        private List<StoryzonEntity> GetByGenreAndNotSelected(List<StoryzonEntity> storiesForRecommended, List<StoryzonEntity> userSelectedThose, List<StoryzonEntity> stories)
+        {
+            var mostSelectedGenre = userSelectedThose?
+              .GroupBy(x => x)
+              ?.OrderByDescending(x => x.Count()).Select(x => x.Key)
+              ?.FirstOrDefault()?.Genre;
+            if (mostSelectedGenre is not null)
+            {
+                storiesForRecommended = stories.Where(story => story.Genre == mostSelectedGenre && !userSelectedThose.Any(x => x.Id == story.Id)).ToList();
+                ViewData["mostSelectedGenre"] = mostSelectedGenre;
+                ViewData["storiesNotSelectedByUser"] = storiesForRecommended;
+
+            }
+            return storiesForRecommended;
         }
     }
 }

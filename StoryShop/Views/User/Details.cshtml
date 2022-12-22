@@ -5,6 +5,7 @@
 @{
     ViewData["Title"] = "Details";
     var currentUser = ViewData["User"] as UserEntity;
+     var storiesSelectedByUser = ViewData["storiesSelectedByUser"] as List<StoryzonEntity>;
 }
 <div class="container pt-5 pb-5">
     <div class="pt-5 pb-5">
@@ -53,4 +54,57 @@
         }
 
     </div>
+
+    @if (User.IsInRole(Role.SuperAdmin) || User.IsInRole(Role.Admin))
+{
+
+    <div class="contact-us container pt-5">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-xs-5 mb-5">
+                            <h2>Stories Selected By @Model.UserName <b>Management</b></h2>
+                        </div>
+                      
+                    </div>
+                </div>
+              @*  <div class="top-buttons">
+                    <a asp-action="Create" class="btn bg-dark text-white pl-2 w-25"><i class="material-icons bg-dark text-white">&#xE147;</i> <span>Add New User</span></a>
+                    <form asp-action="WriteToExcel" class="excell-button" method="post">
+                        <button type="Submit" class="btn bg-dark text-white w-25"><i class="material-icons">&#xE24D;</i> <span>Export to Excel</span></button>
+                    </form>
+                </div>*@
+
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>StoryTitle</th>
+                            <th>StoryGenre</th>
+                            <th>StoryGenre</th>
+                            <th>User times selected</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var story in @storiesSelectedByUser.GroupBy(x => x.Title))
+                        {
+                            <tr>
+                                <td>@currentUser.FirstName</td>
+                                <td>@story.Key</td>
+                                <td>@story.FirstOrDefault().Genre</td>
+                                 <td>@currentUser.Role</td>
+                                 <td>@story.Count()</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+
+
+}
 </div>

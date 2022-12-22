@@ -15,7 +15,7 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddSingleton<UserSingleton>();
 builder.Services.AddSingleton<SpeechSynthesizer>(SynthesizerSingleton.Instance);
 builder.Services.AddSingleton(new StoryZonDbContext());
-
+builder.Services.AddScoped<IUserSelectedStoryService, UserSelectedStoryService>();
 builder.Services.AddScoped<IStoryZonService, StoryzonService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IFileService, FileService>();

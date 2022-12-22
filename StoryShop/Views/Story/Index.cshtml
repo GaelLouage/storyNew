@@ -17,21 +17,21 @@
 
     var reviews = ViewData["reviews"] as List<ReviewEntity>;
     var storyDelete = ViewData["storyDeleted"] as string;
-
+    var storiesNotSelectedByUser = ViewData["storiesNotSelectedByUser"] as List<StoryzonEntity>;
+    var mostSelectedGenreByUser = ViewData["mostSelectedGenre"] as string;
     double GetAverage(string storyId)
     {
         if (reviews is null) return 0;
         var rating = @reviews.Where(x => x.StoryId == storyId).Sum(x => int.Parse(x.Rating));
-        if(rating !=  0)
+        if (rating != 0)
         {
             return rating / @reviews.Where(x => x.StoryId == storyId).Count();
-        } 
+        }
         return 0;
     }
 }
 
-@*@if (User.IsInRole("Admin"))
-{*@
+
 
 <!-- ***** Main Banner Area Start ***** -->
 <div class="main-banner" id="top">
@@ -92,6 +92,70 @@
         </div>
     </div>
 </div>
+
+@if (User.Identity.IsAuthenticated)
+{
+       @if (storiesNotSelectedByUser is not null && !string.IsNullOrEmpty(mostSelectedGenreByUser))
+                            {
+    @*user most selected genres*@
+    <section class="section" id="men">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="section-heading">
+                        <h2>Recommended</h2>
+                        <span>Micro adventure stories</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="men-item-carousel">
+                        <div class="owl-men-item owl-carousel">
+                            @*max selected genre for user and did not read the story*@
+                         
+                                @foreach (var story in storiesNotSelectedByUser.Where(x => x.Genre == mostSelectedGenreByUser))
+                                {
+                                    <div class="item">
+                                        <div class="thumb">
+                                            <div class="hover-content">
+                                                <ul>
+                                                    <li><a asp-action="Details" asp-route-id=@story.Id><i class="fa fa-eye"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <img src="~/@story.Image" alt="">
+                                        </div>
+                                        <div class="down-content">
+                                            <h4>@story.Title</h4>
+                                        </div>
+                                        <ul class="stars d-flex">
+                                            @for (int i = 0; i < 5; i++)
+                                            {
+                                                if (GetAverage(story.Id) > i)
+                                                {
+                                                    <li><i class="fa fa-star" style="color:orange;"></i></li>
+                                                }
+                                                else
+                                                {
+                                                    <li><i class="fa fa-star checked"></i></li>
+                                                }
+                                            }
+                                        </ul>
+                                    </div>
+                                }
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        }
+}
+
+@*end of selected genres*@
 <!-- ***** adventure Area Starts ***** -->
 <section class="section" id="men">
     <div class="container">

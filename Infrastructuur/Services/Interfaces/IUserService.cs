@@ -21,5 +21,6 @@ namespace Infrastructuur.Services.Interfaces
             (string userId, string storyzonId);
 
         Task<UserEntity> GetUserByNameAsync(string userName);    
+
     }
 }

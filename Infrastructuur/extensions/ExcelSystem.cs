@@ -8,12 +8,13 @@ using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using NPOI.HSSF.UserModel;
 using NPOI.HSSF.Util;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Infrastructuur.extensions
 {
-    public static  class ExcelSystem 
+    public static  class ExcelSystem  
     {
-        public static bool WriteDataToExcel<T>(this List<T> data, string fileName, Dictionary<string, string> columnNames)
+        public static MemoryStream WriteDataToExcel<T>(this List<T> data, string fileName, Dictionary<string, string> columnNames)
         {
             try
             {
@@ -52,16 +53,16 @@ namespace Infrastructuur.extensions
                         cellIndex++;
                     }
                 }
-
-                using (var fileStream = File.Create(fileName))
-                {
-                    workbook.Write(fileStream);
-                }
-                return true;
+                MemoryStream stream = new MemoryStream();
+                // Write the workbook to the memory stream
+                workbook.Write(stream);
+                stream.Position = 0;
+            
+                return stream;
             }
             catch
             {
-                return false;
+                return null;
             }
         }
      

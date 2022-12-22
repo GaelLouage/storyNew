@@ -26,7 +26,8 @@ namespace StoryShop.Controllers
         private readonly UserSingleton _userSingleton;
         private readonly SpeechSynthesizer _synthesizer;
         private readonly IReviewService _reviewService;
-        public UserController(IUserService userService, ILogger<UserController> logger, UserSingleton userSingleton, SpeechSynthesizer synthesizer, IReviewService reviewService)
+        private readonly IUserSelectedStoryService _userSelectedStoryService;
+        public UserController(IUserService userService, ILogger<UserController> logger, UserSingleton userSingleton, SpeechSynthesizer synthesizer, IReviewService reviewService, IUserSelectedStoryService userSelectedStoryService)
         {
             _userService = userService;
             _logger = logger;
@@ -34,6 +35,7 @@ namespace StoryShop.Controllers
             _synthesizer = synthesizer;
             _synthesizer.SpeakAsyncCancelAll();
             _reviewService = reviewService;
+            _userSelectedStoryService = userSelectedStoryService;
         }
 
         // GET: UserController
@@ -74,13 +76,16 @@ namespace StoryShop.Controllers
                     users = users.OrderBy(x => x.Role).ToList();
                     break;
             }
-          
+       
             return View(users);
         }
         // GET: UserController/Details/5
         public async Task<ActionResult> Details(string id)
         {
             ViewData["User"] = _userSingleton.User;
+            var storiesSelected = (await _userSelectedStoryService.GetStoryzonsByUserSelectedIdAsync(_userSingleton.User.Id)).ToList();
+            ViewData["storiesSelectedByUser"] = storiesSelected;
+
             return View(await _userService.GetUserByIdAsync(id));
         }
         public async Task<ActionResult> DetailsUser(string userName)
@@ -296,17 +301,18 @@ namespace StoryShop.Controllers
         public async Task<IActionResult> WriteToExcel()
         {
 
-            if ((await _userService.GetUsersAsync()).ToList().WriteDataToExcel<UserEntity>("UserData.xls", new Dictionary<string, string>
+         var file =    (await _userService.GetUsersAsync()).ToList().WriteDataToExcel<UserEntity>("UserData.xls", new Dictionary<string, string>
             {
                 {"UserName","UserName" },
                 {"FirstName","FirstName" },
                 {"LastName","Email" },
                 {"Role","Role" }
-            }))
-            {
-                return RedirectToAction(nameof(UserManagement));
-            }
-            return RedirectToAction(nameof(UserManagement));
+            });
+            Response.Headers.Add("Content-Disposition", "attachment; filename=data.xls");
+
+     
+
+            return File(file.ToArray(), "application/octet-stream");
         }
 
         //public async Task<IActionResult> PasswordReseter(string email)
