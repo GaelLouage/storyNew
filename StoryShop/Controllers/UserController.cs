@@ -26,8 +26,10 @@ namespace StoryShop.Controllers
         private readonly UserSingleton _userSingleton;
         private readonly SpeechSynthesizer _synthesizer;
         private readonly IReviewService _reviewService;
+        private readonly IResetTokenService _resetTokenService;
         private readonly IUserSelectedStoryService _userSelectedStoryService;
-        public UserController(IUserService userService, ILogger<UserController> logger, UserSingleton userSingleton, SpeechSynthesizer synthesizer, IReviewService reviewService, IUserSelectedStoryService userSelectedStoryService)
+
+        public UserController(IUserService userService, ILogger<UserController> logger, UserSingleton userSingleton, SpeechSynthesizer synthesizer, IReviewService reviewService, IUserSelectedStoryService userSelectedStoryService, IResetTokenService resetTokenService)
         {
             _userService = userService;
             _logger = logger;
@@ -36,6 +38,7 @@ namespace StoryShop.Controllers
             _synthesizer.SpeakAsyncCancelAll();
             _reviewService = reviewService;
             _userSelectedStoryService = userSelectedStoryService;
+            _resetTokenService = resetTokenService;
         }
 
         // GET: UserController
@@ -53,11 +56,11 @@ namespace StoryShop.Controllers
             if (!string.IsNullOrEmpty(searchInput))
             {
                 users = users.Where(x => x.FirstName.ToLower().Contains(searchInput.ToLower())
-                || x.LastName.ToLower().Contains(searchInput.ToLower()) 
+                || x.LastName.ToLower().Contains(searchInput.ToLower())
                 || x.UserName.ToLower().Contains(searchInput.ToLower())
                 || x.Email.ToLower().Contains(searchInput.ToLower())).ToList();
             }
-           
+
             switch (filtering)
             {
                 case "UserName":
@@ -76,7 +79,7 @@ namespace StoryShop.Controllers
                     users = users.OrderBy(x => x.Role).ToList();
                     break;
             }
-       
+
             return View(users);
         }
         // GET: UserController/Details/5
@@ -107,6 +110,7 @@ namespace StoryShop.Controllers
         {
             try
             {
+                user.Email = user.Email.ToLower();
                 user.Password = user.Password.HashToPassword();
                 await _userService.AddUserAsync(user);
                 return RedirectToAction(nameof(UserManagement));
@@ -135,14 +139,15 @@ namespace StoryShop.Controllers
             try
             {
                 var userToUpdate = await _userService.GetUserByIdAsync(id);
-                if(_userSingleton.User.Id != userToUpdate.Id)
+                if (_userSingleton.User.Id != userToUpdate.Id)
                 {
                     user.Password = userToUpdate.Password.HashToPassword();
-                } else
+                }
+                else
                 {
                     user.Password = user.Password.HashToPassword();
                 }
-             
+
 
                 await _userService.UpdateUserByIdAsync(id, user);
                 var userRole = _userSingleton.User;
@@ -176,12 +181,12 @@ namespace StoryShop.Controllers
                 await _userService.DeleteUserByIdAsync(id);
                 var reviews = (await _reviewService.GetReviews())
                     .Where(x => x.UserId == id);
-           
+
                 foreach (var review in reviews)
                 {
                     await _reviewService.RemoveReview(review.ReviewId);
                 }
-              
+
                 return RedirectToAction(nameof(UserManagement));
             }
             catch
@@ -204,23 +209,24 @@ namespace StoryShop.Controllers
                 return RedirectToAction(nameof(Login));
             }
 
-           
+
             // Get the user from the database
             var userLogin = await _userService.GetUserByNameAsync(user.UserName);
-            if (!HashPassword.VerifyPassword(user.Password, userLogin.Password))
+            // Check if the user exists
+            if (userLogin is null)
             {
                 TempData["ErrorMessage"] = "Wrong username or password.";
                 return RedirectToAction(nameof(Login));
             }
-                // Check if the user exists
-                if (userLogin is null)
+
+            if (!HashPassword.VerifyPassword(user.Password, userLogin.Password))
             {
                 TempData["ErrorMessage"] = "Wrong username or password.";
                 return RedirectToAction(nameof(Login));
             }
 
             // Check if the username and password match
-            if (!Equals(user.UserName,userLogin.UserName))
+            if (!Equals(user.UserName, userLogin.UserName))
             {
                 TempData["ErrorMessage"] = "Wrong username or password.";
                 return RedirectToAction(nameof(Login));
@@ -273,7 +279,8 @@ namespace StoryShop.Controllers
                 {
                     TempData["ErrorMessage"] = "A user with those credentials already exists.";
                     return RedirectToAction(nameof(Register));
-                } else
+                }
+                else
                 {
                     return RedirectToAction(nameof(Login));
                 }
@@ -292,7 +299,7 @@ namespace StoryShop.Controllers
         {
 
             await HttpContext.SignOutAsync();
-            return RedirectToAction(nameof(Index),"Story");
+            return RedirectToAction(nameof(Index), "Story");
         }
         //write to excell
         [Authorize(Roles = "Admin,SuperAdmin")]
@@ -301,7 +308,7 @@ namespace StoryShop.Controllers
         public async Task<IActionResult> WriteToExcel()
         {
 
-         var file =    (await _userService.GetUsersAsync()).ToList().WriteDataToExcel<UserEntity>("UserData.xls", new Dictionary<string, string>
+            var file = (await _userService.GetUsersAsync()).ToList().WriteDataToExcel<UserEntity>("UserData.xls", new Dictionary<string, string>
             {
                 {"UserName","UserName" },
                 {"FirstName","FirstName" },
@@ -312,6 +319,105 @@ namespace StoryShop.Controllers
 
 
             return File(file.ToArray(), "application/octet-stream");
+        }
+
+
+        // emailsender for password forgot
+        // email to send to
+        public async Task<IActionResult> ForgotPassword()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(string email)
+        {
+            var resetEntity = new ResetTokenEntity();
+            resetEntity.Email = email;
+            await _resetTokenService.AddResetTokenAsync(resetEntity);
+            var tokenUser = (await _resetTokenService.GetResetByEmailAsync(email));
+            if (tokenUser is null) return View();
+            // save the token and expiration date to the database
+
+            //send password to reset email
+            string link = $"https://localhost:44316/User/PasswordReset/{tokenUser.Token}";
+
+            var contact = new ContactEntity();
+            var message = new MailMessage();
+            var smtpClient = new SmtpClient();
+            contact.Message = $"{link}";
+            contact.UserEmail = email.ToLower();
+            var credentials = ReadJson.GetEmailCredentials(@"C:/Users/louag/Desktop/storyContactCredentials/credentials.json");
+            contact.EmailAddress = credentials.EmailAddress;
+            contact.PassWord = credentials.PassWord;
+            // Set the email details
+            message = new MailMessage();
+            message.From = new MailAddress(contact.UserEmail);
+            message.To.Add(contact.EmailAddress);
+            message.Subject = "Contact";
+            message.Body = contact.Message;
+
+            // Set the server details
+            smtpClient = new SmtpClient();
+            // use hotmail to send emails
+            smtpClient.Host = "smtp.office365.com";
+            smtpClient.Port = 587;
+            smtpClient.EnableSsl = true;
+            smtpClient.Credentials = new NetworkCredential(contact.EmailAddress, credentials.PassWord);
+            // Send the email
+            smtpClient.Send(message);
+    
+            return View();
+        }
+        [HttpGet("User/PasswordReset/{token}")]
+        public async Task<IActionResult> PasswordReset([FromRoute] string token)
+        {
+           
+             var tokenUser = await _resetTokenService.GetResetByTokenAsync(token);
+            if (tokenUser == null) return NotFound();
+            (string savedtoken, DateTime expirationtime) = await GetToken(tokenUser.Email);
+            if (token == savedtoken && DateTime.Now < expirationtime)
+            {
+                // token is valid, display the password reset form
+                return View();
+            }
+            else
+            {
+                // token is invalid or has expired, show an error message
+                return View("not found");
+            }
+        }
+
+        [HttpPost("User/PasswordReset/{token}")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PasswordReset([FromRoute]string token, string newPassword, string newPasswordCheck)
+        {
+
+            var user = (await _resetTokenService.GetResetByTokenAsync(token));
+            if (string.IsNullOrEmpty(newPassword))
+            {
+                return View();
+            }
+            if(newPassword != newPasswordCheck)
+            {
+                return View();
+            }
+            newPassword = newPassword.HashToPassword();
+            if (!(await _userService.UpdatePasswordByEMailAddressAsync(user.Email, newPassword)))
+            {
+                //give error message not same newpas and newpasscheck or failed
+                return View();
+            }
+            
+            await _resetTokenService.RemoveTokenByIdAsync(user.Id);
+            return RedirectToAction(nameof(Login));
+        }
+        public async Task<(string, DateTime)> GetToken(string email)
+        {
+            // get the token and saved date from the database
+
+            var tokenUser = await _resetTokenService.GetResetByEmailAsync(email);
+            return (tokenUser.Token, DateTime.Parse(tokenUser.ExpirationDate));
         }
     }
 }

@@ -96,7 +96,6 @@
                             @foreach (var story in @storiesSelectedByUser.GroupBy(x => x.Title))
                             {
                                 <tr>
-                                    <td>@Model.FirstName</td>
                                     <td>@story.Key</td>
                                     <td>@story.FirstOrDefault().Genre</td>
                                     <td>@Model.Role</td>

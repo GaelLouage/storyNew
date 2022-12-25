@@ -80,6 +80,19 @@ namespace Infrastructuur.Services.Classes
             throw new NotImplementedException();
         }
 
+        public async Task<bool> UpdatePasswordByEMailAddressAsync(string email, string password)
+        {
+            var userByEmail = (await _storyZonDbContext.GetAllAsync<UserEntity>("user")).FirstOrDefault(x => x.Email == email);
+            if(!(await _storyZonDbContext.UpdateAsync<UserEntity>(userByEmail.Id, new Dictionary<string, string>
+            {
+                {"password",password }
+            },"user")))
+            {
+                return false;
+            }
+            return true;
+        }
+
         public async Task<bool> UpdateUserByIdAsync(string id, UserEntity user)
         {
             if(!(await _storyZonDbContext.UpdateAsync<UserEntity>(id, new Dictionary<string, string>()
@@ -87,7 +100,7 @@ namespace Infrastructuur.Services.Classes
                 {"userName", user.UserName },
                 {"firstName",user.FirstName},
                 {"lastName", user.LastName},
-                {"passWord", user.Password },
+                {"password", user.Password },
                 {"email", user.Email },
                 {"role", user.Role }
             }, "user")))

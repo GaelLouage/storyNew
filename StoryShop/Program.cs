@@ -20,6 +20,8 @@ builder.Services.AddScoped<IStoryZonService, StoryzonService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
+builder.Services.AddScoped<IResetTokenService, ResetTokenService>();
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => { options.LoginPath = "/login"; });
 var app = builder.Build();
