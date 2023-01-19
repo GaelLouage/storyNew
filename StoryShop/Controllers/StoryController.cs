@@ -2,7 +2,6 @@
 using Infrastructuur.extensions;
 using Infrastructuur.Models;
 using Infrastructuur.Services.Interfaces;
-using Infrastructuur.singleton;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,16 +22,15 @@ namespace StoryShop.Controllers
         private readonly IReviewService _reviewService;
         private readonly IUserSelectedStoryService _userSelectedStoryService;
         private readonly SpeechSynthesizer _synthesizer;
-        private readonly UserSingleton _userSingleton;
+        private UserEntity? user;
         private static string? detailId;
         public static bool isPlay = false;
 
-        public StoryController(IStoryZonService storyZonService, IFileService fileService, IUserService userService, UserSingleton userSingleton, IReviewService reviewService, SpeechSynthesizer synthesizer, IUserSelectedStoryService userSelectedStoryService)
+        public StoryController(IStoryZonService storyZonService, IFileService fileService, IUserService userService, IReviewService reviewService, SpeechSynthesizer synthesizer, IUserSelectedStoryService userSelectedStoryService)
         {
             _storyZonService = storyZonService;
             _fileService = fileService;
             _userService = userService;
-            _userSingleton = userSingleton;
             _reviewService = reviewService;
             _synthesizer = synthesizer;
             _userSelectedStoryService = userSelectedStoryService;
@@ -45,12 +43,12 @@ namespace StoryShop.Controllers
             var storiesForRecommended = new List<StoryzonEntity>();
             List<StoryzonEntity> userSelectedThose = null;
             var stories = await _storyZonService.GetStoryzonsAsync();
-            _userSingleton.User = (await _userService.GetUsersAsync()).FirstOrDefault(x => x.Email == HttpContext?.User?.FindFirst(ClaimTypes.Email)?.Value);
+            user = (await _userService.GetUsersAsync()).FirstOrDefault(x => x.Email == HttpContext?.User?.FindFirst(ClaimTypes.Email)?.Value);
             ViewData["reviews"] = (await _reviewService.GetReviews());
             ViewData["topStories"] = stories;
-            if(_userSingleton.User is not null)
+            if(user is not null)
             {
-                userSelectedThose = (await _userSelectedStoryService?.GetStoryzonsByUserSelectedIdAsync(_userSingleton.User.Id)).ToList();
+                userSelectedThose = (await _userSelectedStoryService?.GetStoryzonsByUserSelectedIdAsync(user.Id)).ToList();
                 storiesForRecommended = GetByGenreAndNotSelected(storiesForRecommended, userSelectedThose, stories);
             }
             return View(stories);
@@ -136,11 +134,11 @@ namespace StoryShop.Controllers
                 ViewData["usersRevs"] = usersRev;
 
             }
-            if(!await _userSelectedStoryService.AddSelectedStoryToUserByIdAsync(new UserStorySelectEntity
+            if (!await _userSelectedStoryService.AddSelectedStoryToUserByIdAsync(new UserStorySelectEntity
             {
                 StoryId = id,
-                UserId = _userSingleton.User.Id
-            }))
+                UserId = (await _userService.GetUsersAsync()).FirstOrDefault(x => x.Email == HttpContext?.User?.FindFirst(ClaimTypes.Email)?.Value).Id
+        }))
             {
                 //get error message for admin
             }
@@ -255,7 +253,7 @@ namespace StoryShop.Controllers
             review.ReviewBody = message;
             review.Rating = rating;
             review.StoryId = detailId;
-            review.UserId = _userSingleton.User.Id;
+            review.UserId = (await _userService.GetUsersAsync()).FirstOrDefault(x => x.Email == HttpContext?.User?.FindFirst(ClaimTypes.Email)?.Value).Id;
             var reviewToAdd = await _reviewService.AddReview(review);
             return RedirectToAction(nameof(Details), new { id = detailId });
         }

@@ -41,7 +41,7 @@ namespace Infrastructuur.Services.Classes
                 { "lastName", user.LastName},
                 { "password", user.Password},
                 { "email", user.Email},
-                {"role", "User" }
+                { "role", "User" }
             });
             return (await _storyZonDbContext.GetAllAsync<UserEntity>("user")).Count() > users.Count(); 
         }

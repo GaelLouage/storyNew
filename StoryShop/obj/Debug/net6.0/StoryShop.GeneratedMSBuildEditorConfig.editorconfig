@@ -5,116 +5,117 @@ build_property.UsingMicrosoftNETSdkWeb = true
 build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = 
 build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = StoryShop
 build_property.RootNamespace = StoryShop
-build_property.ProjectDir = C:\Users\louag\Desktop\storyzon\Story\StoryShop\
+build_property.ProjectDir = C:\Users\louagga\Source\Repos\storyNew\StoryShop\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\louag\Desktop\storyzon\Story\StoryShop
+build_property.MSBuildProjectDirectory = C:\Users\louagga\Source\Repos\storyNew\StoryShop
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/Home/About.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/Home/About.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBYm91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/Home/Contact.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/Home/Contact.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDb250YWN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/Home/Index.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/Home/Privacy.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/Shared/Error.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/Story/AdminList.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/Story/AdminList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvcnlcQWRtaW5MaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/Story/Create.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/Story/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvcnlcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/Story/Delete.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/Story/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvcnlcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/Story/Details.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/Story/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvcnlcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/Story/Edit.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/Story/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvcnlcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/Story/Index.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/Story/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvcnlcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/Story/Stories.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/Story/Stories.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvcnlcU3Rvcmllcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/User/Create.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/User/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/User/Delete.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/User/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/User/Details.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/User/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/User/Edit.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/User/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/User/ForgotPassword.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/User/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/User/Index.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/User/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/User/Login.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/User/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/User/PasswordReset.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/User/PasswordReset.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxQYXNzd29yZFJlc2V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/User/Register.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/User/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/User/UserManagement.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/User/UserManagement.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxVc2VyTWFuYWdlbWVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/_ViewImports.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/_ViewStart.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/louag/Desktop/storyzon/Story/StoryShop/Views/Shared/_Layout.cshtml]
+[C:/Users/louagga/Source/Repos/storyNew/StoryShop/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-yvhd6clial

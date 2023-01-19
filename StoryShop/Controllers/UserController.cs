@@ -3,12 +3,12 @@ using Infrastructuur.extensions;
 using Infrastructuur.helpers;
 using Infrastructuur.Models;
 using Infrastructuur.Services.Interfaces;
-using Infrastructuur.singleton;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NPOI.SS.Formula.Functions;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Mail;
@@ -23,17 +23,15 @@ namespace StoryShop.Controllers
     {
         private readonly IUserService _userService;
         private readonly ILogger<UserController> _logger;
-        private readonly UserSingleton _userSingleton;
         private readonly SpeechSynthesizer _synthesizer;
         private readonly IReviewService _reviewService;
         private readonly IResetTokenService _resetTokenService;
         private readonly IUserSelectedStoryService _userSelectedStoryService;
-
-        public UserController(IUserService userService, ILogger<UserController> logger, UserSingleton userSingleton, SpeechSynthesizer synthesizer, IReviewService reviewService, IUserSelectedStoryService userSelectedStoryService, IResetTokenService resetTokenService)
+        private  UserEntity? userConnect;
+        public UserController(IUserService userService, ILogger<UserController> logger, SpeechSynthesizer synthesizer, IReviewService reviewService, IUserSelectedStoryService userSelectedStoryService, IResetTokenService resetTokenService)
         {
             _userService = userService;
             _logger = logger;
-            _userSingleton = userSingleton;
             _synthesizer = synthesizer;
             _synthesizer.SpeakAsyncCancelAll();
             _reviewService = reviewService;
@@ -51,7 +49,12 @@ namespace StoryShop.Controllers
         [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<IActionResult> UserManagement(string filtering, string searchInput)
         {
-            ViewData["User"] = _userSingleton.User;
+            if((await _userService?.GetUsersAsync())?.FirstOrDefault(x => x?.Email == HttpContext?.User?.FindFirst(ClaimTypes.Email)?.Value) is not null)
+            {
+                userConnect = (await _userService.GetUsersAsync()).FirstOrDefault(x => x.Email == HttpContext?.User?.FindFirst(ClaimTypes.Email)?.Value);
+                ViewData["User"] = userConnect;
+            }
+         
             var users = (await _userService.GetUsersAsync()).ToList();
             if (!string.IsNullOrEmpty(searchInput))
             {
@@ -85,7 +88,7 @@ namespace StoryShop.Controllers
         // GET: UserController/Details/5
         public async Task<ActionResult> Details(string id)
         {
-            ViewData["User"] = _userSingleton.User;
+            ViewData["User"] = (await _userService.GetUsersAsync()).FirstOrDefault(x => x.Email == HttpContext?.User?.FindFirst(ClaimTypes.Email)?.Value);
             var storiesSelected = (await _userSelectedStoryService.GetStoryzonsByUserSelectedIdAsync(id)).ToList();
             ViewData["storiesSelectedByUser"] = storiesSelected;
 
@@ -93,7 +96,7 @@ namespace StoryShop.Controllers
         }
         public async Task<ActionResult> DetailsUser(string userName)
         {
-            return RedirectToAction(nameof(Details), new { id = _userSingleton.User.Id });
+            return RedirectToAction(nameof(Details), new { id = (await _userService.GetUsersAsync()).FirstOrDefault(x => x.Email == HttpContext?.User?.FindFirst(ClaimTypes.Email)?.Value).Id });
         }
         // GET: UserController/Create
         [Authorize(Roles = "Admin,SuperAdmin")]
@@ -126,7 +129,7 @@ namespace StoryShop.Controllers
         public async Task<ActionResult> Edit(string id)
         {
             var user = await _userService.GetUserByIdAsync(id);
-            ViewData["currentUser"] = _userSingleton.User;
+            ViewData["currentUser"] = (await _userService.GetUsersAsync()).FirstOrDefault(x => x.Email == HttpContext?.User?.FindFirst(ClaimTypes.Email)?.Value);
             return View(await _userService.GetUserByIdAsync(id));
         }
 
@@ -139,7 +142,7 @@ namespace StoryShop.Controllers
             try
             {
                 var userToUpdate = await _userService.GetUserByIdAsync(id);
-                if (_userSingleton.User.Id != userToUpdate.Id)
+                if ((await _userService.GetUsersAsync()).FirstOrDefault(x => x.Email == HttpContext?.User?.FindFirst(ClaimTypes.Email)?.Value).Id != userToUpdate.Id)
                 {
                     user.Password = userToUpdate.Password.HashToPassword();
                 }
@@ -150,7 +153,7 @@ namespace StoryShop.Controllers
 
 
                 await _userService.UpdateUserByIdAsync(id, user);
-                var userRole = _userSingleton.User;
+                var userRole = userConnect;
 
                 if (userRole is not null && (userRole.Role == Role.Admin || userRole.Role == Role.SuperAdmin))
                 {

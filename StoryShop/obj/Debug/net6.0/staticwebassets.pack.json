@@ -1,0 +1,493 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\StoryShop.bundle.scp.css",
+      "PackagePath": "staticwebassets\\StoryShop.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\ATaleOfRobotsAndAdventurers.jpg",
+      "PackagePath": "staticwebassets\\Images\\ATaleOfRobotsAndAdventurers.jpg"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\DinoLand.jfif",
+      "PackagePath": "staticwebassets\\Images\\DinoLand.jfif"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\EscapefromtheIslandofDoom.jpg",
+      "PackagePath": "staticwebassets\\Images\\EscapefromtheIslandofDoom.jpg"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\Gael.jpg",
+      "PackagePath": "staticwebassets\\Images\\Gael.jpg"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\StoryzonBanner.jpg",
+      "PackagePath": "staticwebassets\\Images\\StoryzonBanner.jpg"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\StrewberryBananaHash.PNG",
+      "PackagePath": "staticwebassets\\Images\\StrewberryBananaHash.PNG"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\TheCabinintheWoods.jpg",
+      "PackagePath": "staticwebassets\\Images\\TheCabinintheWoods.jpg"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\TheCuriousCaseoftheDisappearingHeirloom.jpg",
+      "PackagePath": "staticwebassets\\Images\\TheCuriousCaseoftheDisappearingHeirloom.jpg"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\TheEnchantedForestMystery.jpg",
+      "PackagePath": "staticwebassets\\Images\\TheEnchantedForestMystery.jpg"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\TheGreatBearAdventure.jfif",
+      "PackagePath": "staticwebassets\\Images\\TheGreatBearAdventure.jfif"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\TheHauntedHouseontheHill.jpg",
+      "PackagePath": "staticwebassets\\Images\\TheHauntedHouseontheHill.jpg"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\TheHeistoftheCentury.jpg",
+      "PackagePath": "staticwebassets\\Images\\TheHeistoftheCentury.jpg"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\TheInvisibleMansRevenge.jpg",
+      "PackagePath": "staticwebassets\\Images\\TheInvisibleMansRevenge.jpg"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\TheLegendoftheCursedCemetery.jpg",
+      "PackagePath": "staticwebassets\\Images\\TheLegendoftheCursedCemetery.jpg"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\TheNoSenseAdventure.jpg",
+      "PackagePath": "staticwebassets\\Images\\TheNoSenseAdventure.jpg"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\ThePirateKingsQuest.jpg",
+      "PackagePath": "staticwebassets\\Images\\ThePirateKingsQuest.jpg"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\TheTimeTravelersDilemma.jpg",
+      "PackagePath": "staticwebassets\\Images\\TheTimeTravelersDilemma.jpg"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\TheTreasureoftheGoldenMonkey.jpg",
+      "PackagePath": "staticwebassets\\Images\\TheTreasureoftheGoldenMonkey.jpg"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\TheWildWest.jpg",
+      "PackagePath": "staticwebassets\\Images\\TheWildWest.jpg"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\ZombieKing.jfif",
+      "PackagePath": "staticwebassets\\Images\\ZombieKing.jfif"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\app.PNG",
+      "PackagePath": "staticwebassets\\Images\\app.PNG"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\batman.jpg",
+      "PackagePath": "staticwebassets\\Images\\batman.jpg"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\belangerijke methods in javascript 2.PNG",
+      "PackagePath": "staticwebassets\\Images\\belangerijke methods in javascript 2.PNG"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\deskmatix.PNG",
+      "PackagePath": "staticwebassets\\Images\\deskmatix.PNG"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\dev.PNG",
+      "PackagePath": "staticwebassets\\Images\\dev.PNG"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\header.PNG",
+      "PackagePath": "staticwebassets\\Images\\header.PNG"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\horrorkeyboard.jpg",
+      "PackagePath": "staticwebassets\\Images\\horrorkeyboard.jpg"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\indianAdventure.jpg",
+      "PackagePath": "staticwebassets\\Images\\indianAdventure.jpg"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\koffie.jpg",
+      "PackagePath": "staticwebassets\\Images\\koffie.jpg"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\storyzonLogo.jpg",
+      "PackagePath": "staticwebassets\\Images\\storyzonLogo.jpg"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\theLivingMountain.jpg",
+      "PackagePath": "staticwebassets\\Images\\theLivingMountain.jpg"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\Images\\themanwiththeetofsteel.jpg",
+      "PackagePath": "staticwebassets\\Images\\themanwiththeetofsteel.jpg"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\css\\Login.css",
+      "PackagePath": "staticwebassets\\css\\Login.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\css\\bootstrap-alert.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap-alert.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\css\\flex-slider.css",
+      "PackagePath": "staticwebassets\\css\\flex-slider.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\css\\font-awesome.css",
+      "PackagePath": "staticwebassets\\css\\font-awesome.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\css\\lightbox.css",
+      "PackagePath": "staticwebassets\\css\\lightbox.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\css\\management-table.css",
+      "PackagePath": "staticwebassets\\css\\management-table.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\css\\owl-carousel.css",
+      "PackagePath": "staticwebassets\\css\\owl-carousel.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\css\\templatemo-hexashop.css",
+      "PackagePath": "staticwebassets\\css\\templatemo-hexashop.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\js\\accordions.js",
+      "PackagePath": "staticwebassets\\js\\accordions.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\js\\alert-bootstrap.js",
+      "PackagePath": "staticwebassets\\js\\alert-bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\js\\custom.js",
+      "PackagePath": "staticwebassets\\js\\custom.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\js\\datepicker.js",
+      "PackagePath": "staticwebassets\\js\\datepicker.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\js\\imgfix.min.js",
+      "PackagePath": "staticwebassets\\js\\imgfix.min.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\js\\isotope.js",
+      "PackagePath": "staticwebassets\\js\\isotope.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\js\\jquery-2.1.0.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery-2.1.0.min.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\js\\jquery.counterup.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery.counterup.min.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\js\\lightbox.js",
+      "PackagePath": "staticwebassets\\js\\lightbox.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\js\\owl-carousel.js",
+      "PackagePath": "staticwebassets\\js\\owl-carousel.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\js\\popper.js",
+      "PackagePath": "staticwebassets\\js\\popper.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\js\\quantity.js",
+      "PackagePath": "staticwebassets\\js\\quantity.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\js\\scrollreveal.min.js",
+      "PackagePath": "staticwebassets\\js\\scrollreveal.min.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\js\\slick.js",
+      "PackagePath": "staticwebassets\\js\\slick.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\js\\waypoints.min.js",
+      "PackagePath": "staticwebassets\\js\\waypoints.min.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\louagga\\Source\\Repos\\storyNew\\StoryShop\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.StoryShop.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.StoryShop.props",
+      "PackagePath": "build\\StoryShop.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.StoryShop.props",
+      "PackagePath": "buildMultiTargeting\\StoryShop.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.StoryShop.props",
+      "PackagePath": "buildTransitive\\StoryShop.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

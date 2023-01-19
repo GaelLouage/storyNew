@@ -22,3 +22,15 @@ C:\Users\louag\Desktop\storyzon\Story\Infrastructuur\obj\Debug\net6.0\Infrastruc
 C:\Users\louag\Desktop\storyzon\Story\Infrastructuur\obj\Debug\net6.0\refint\Infrastructuur.dll
 C:\Users\louag\Desktop\storyzon\Story\Infrastructuur\obj\Debug\net6.0\Infrastructuur.pdb
 C:\Users\louag\Desktop\storyzon\Story\Infrastructuur\obj\Debug\net6.0\ref\Infrastructuur.dll
+C:\Users\louagga\Source\Repos\storyNew\Infrastructuur\bin\Debug\net6.0\Infrastructuur.deps.json
+C:\Users\louagga\Source\Repos\storyNew\Infrastructuur\bin\Debug\net6.0\Infrastructuur.dll
+C:\Users\louagga\Source\Repos\storyNew\Infrastructuur\bin\Debug\net6.0\Infrastructuur.pdb
+C:\Users\louagga\Source\Repos\storyNew\Infrastructuur\obj\Debug\net6.0\Infrastructuur.csproj.AssemblyReference.cache
+C:\Users\louagga\Source\Repos\storyNew\Infrastructuur\obj\Debug\net6.0\Infrastructuur.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\louagga\Source\Repos\storyNew\Infrastructuur\obj\Debug\net6.0\Infrastructuur.AssemblyInfoInputs.cache
+C:\Users\louagga\Source\Repos\storyNew\Infrastructuur\obj\Debug\net6.0\Infrastructuur.AssemblyInfo.cs
+C:\Users\louagga\Source\Repos\storyNew\Infrastructuur\obj\Debug\net6.0\Infrastructuur.csproj.CoreCompileInputs.cache
+C:\Users\louagga\Source\Repos\storyNew\Infrastructuur\obj\Debug\net6.0\Infrastructuur.dll
+C:\Users\louagga\Source\Repos\storyNew\Infrastructuur\obj\Debug\net6.0\refint\Infrastructuur.dll
+C:\Users\louagga\Source\Repos\storyNew\Infrastructuur\obj\Debug\net6.0\Infrastructuur.pdb
+C:\Users\louagga\Source\Repos\storyNew\Infrastructuur\obj\Debug\net6.0\ref\Infrastructuur.dll
